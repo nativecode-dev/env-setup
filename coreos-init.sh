@@ -2,8 +2,8 @@
 
 # systemd
 SYS=/etc/systemd
-SYS_NET=$SYSD/network
-SYS_SVC=$SYSD/system
+SYS_NET=$SYS/network
+SYS_SVC=$SYS/system
 
 # #############################################################################
 # SWAP
@@ -70,7 +70,7 @@ if [ ! -f $NFS_DATA ]; then
 Before=remote-fs.target
 
 [Mount]
-What=10.132.95.139:/data
+What=10.132.95.139:/mnt/prod/core/data
 Where=/data
 Type=nfs
 
