@@ -57,30 +57,3 @@ if [ ! -f $SWAP_SYSCTL ]; then
   echo 'vm.swappiness=10' | sudo tee $SWAP_SYSCTL
   systemctl restart systemd-sysctl
 fi
-
-# #############################################################################
-# NFS
-# #############################################################################
-
-NFS_DATA=$SYS_SVC/data.mount
-
-if [ ! -f $NFS_DATA ]; then
-  cat <<EOT >> $NFS_DATA
-[Unit]
-Before=remote-fs.target
-
-[Mount]
-What=10.132.95.139:/mnt/prod/core/data
-Where=/data
-Type=nfs
-
-[Install]
-WantedBy=remote-fs.target
-EOT
-
-  if [ ! -d /data ]; then
-    mkdir -p /data
-  fi
-
-  systemctl enable --now data.mount
-fi
