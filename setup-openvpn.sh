@@ -38,7 +38,6 @@ EOT
   docker run -v $OVPN_DATA:/etc/openvpn --rm kylemanna/openvpn ovpn_getclient nativecode-production > nativecode-production.ovpn
   docker stop setup-openvpn
   docker rm setup-openvpn
-
-#  systemctl enable --now $SYSINIT
+  systemctl enable --now $SYSINIT
 
 fi
