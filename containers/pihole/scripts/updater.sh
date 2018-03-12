@@ -9,6 +9,7 @@ if [ -f ${PIHOLE_YOUTUBE}/update.lock ]; then
 fi
 
 # Create lock reservation.
+echo "Creating lock file"
 touch ${PIHOLE_YOUTUBE}/update.lock
 
 # Add youtube ads list to default list.
@@ -19,6 +20,7 @@ if [ ! -f ${PIHOLE_YOUTUBE_LIST} ]; then
 fi
 
 if [ ! -f /var/www/html/${PIHOLE_YOUTUBE_LIST_NAME} ]; then
+  echo "Creating symlink to ad list"
   ln -s ${PIHOLE_YOUTUBE_LIST} /var/www/html/${PIHOLE_YOUTUBE_LIST_NAME}
 fi
 
@@ -61,4 +63,5 @@ fi
 $PIHOLE_CLI -f
 
 # Release lock.
+echo "Releasing lock file"
 rm ${PIHOLE_YOUTUBE}/update.lock
