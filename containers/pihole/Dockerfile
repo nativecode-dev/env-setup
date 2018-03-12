@@ -12,12 +12,10 @@ RUN set -ex \
   #############################################################################
   && apt-get -qq update > /dev/null \
   && apt-get -qq upgrade -y > /dev/null \
-  && apt-get -qq install -y python-pip > /dev/null \
   && apt-get -qq autoremove -y > /dev/null \
   && apt-get -qq autoclean -y > /dev/null \
   ;
 
-COPY scripts/dnsdumpster.py ./dnsdumpster/youtube.py
 COPY scripts/env.sh ./env.sh
 COPY scripts/install.sh ./install.sh
 COPY scripts/updater.sh ./updater.sh
