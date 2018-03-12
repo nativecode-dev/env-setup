@@ -26,7 +26,8 @@ TIMESTAMP_FILE=${PIHOLE_YOUTUBE_LIST_NAME}.`date +%s%N | cut -b1-13`
 LIST_TIMESTAMP=/tmp/${TIMESTAMP_FILE}
 
 # Copy the current list to updates for inclusion.
-cat ${PIHOLE_YOUTUBE_LIST} > ${PIHOLE_YOUTUBE_LIST}.updates
+curl -s "https://api.hackertarget.com/hostsearch/?q=googlevideo.com" | awk -F, 'NR>1 {print $1}' > ${PIHOLE_YOUTUBE_LIST}.updates
+cat ${PIHOLE_YOUTUBE_LIST} >> ${PIHOLE_YOUTUBE_LIST}.updates
 
 # Search for blockable sites from logs.
 grep r*.googlevideo.com ${PIHOLE_LOGS} | awk '{print $8}' | grep -v '^googlevideo.com\|redirector' >> ${PIHOLE_YOUTUBE_LIST}.updates
