@@ -1,39 +1,32 @@
-# STAGE: BUILD
-###############################################################################
-FROM diginc/pi-hole:latest AS BUILD
-# Copy install script.
-COPY scripts/youtube-install.sh /etc/pihole/youtube-install.sh
-# Run the install script.
+FROM diginc/pi-hole:latest
+
+WORKDIR /etc/pihole-youtube
+
 RUN set -ex \
-  # Upgrade packages in our environment.
-  && apt-get update \
-  && apt-get upgrade -y \
-  # Install PIP.
-  && apt-get install -y python-pip \
-  # Clean up unneeded packages.
-  && apt-get autoremove -y \
-  && apt-get autoclean -y \
-  # Run the YouTube add blocking install.
-  && sh /etc/pihole/youtube-install.sh \
+  && export TERM=dumb \
+  #############################################################################
+  # PACKAGES
+  #############################################################################
+  && apt-get -qq update > /dev/null \
+  && apt-get -qq upgrade -y > /dev/null \
+  && apt-get -qq install -y python-pip > /dev/null \
+  && apt-get -qq autoremove -y > /dev/null \
+  && apt-get -qq autoclean -y > /dev/null \
   ;
 
-# STAGE: FINAL
-###############################################################################
-FROM diginc/pi-hole:latest
-COPY --from=BUILD /etc/dnsdumpster /etc/dnsdumpster
-COPY --from=BUILD /etc/pihole /etc/pihole
-COPY --from=BUILD /var/www/html /var/www/html
-
-ENV ServerIP="127.0.0.1"
-
-COPY scripts/cron-install.sh /etc/pihole/cron-install.sh
+COPY scripts/dnsdumpster.py ./dnsdumpster/youtube.py
+COPY scripts/env.sh ./env.sh
+COPY scripts/install.sh ./install.sh
+COPY scripts/updater.sh ./updater.sh
 
 RUN set -ex \
-  # Upgrade packages in our environment.
-  && apt-get update \
-  && apt-get upgrade -y \
-  # Install the cron jobs.
-  && crontab /etc/pihole/cron.youtube \
-  # Make files executable.
-  && chmod +x /etc/pihole/youtube-ads.sh \
+  #############################################################################
+  # APPLICATION
+  #############################################################################
+  # Make scripts executable.
+  && chmod +x ./env.sh \
+  && chmod +x ./install.sh \
+  && chmod +x ./updater.sh \
+  # Run the YouTube add blocking install.
+  && ./install.sh \
   ;
