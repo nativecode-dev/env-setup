@@ -3,7 +3,7 @@
 DOCKER=`which docker`
 
 echo "Building and tagging image..."
-$DOCKER build --rm -t nativecode/pihole:latest pihole/
+$DOCKER build --rm -t nativecode/pihole:latest containers/pihole/
 
 if [ "$1" = "run" ]; then
   $DOCKER run \
@@ -11,6 +11,8 @@ if [ "$1" = "run" ]; then
     --name pihole \
     -d \
     -e ServerIP="127.0.0.1" \
+    -e RATE_RELOAD="2" \
+    -e RATE_UPDATE="2" \
     -v PIHOLE:/etc/pihole \
     -v PIHOLEDNS:/etc/dnsmasq.d \
     nativecode/pihole:latest \

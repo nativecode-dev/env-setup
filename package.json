@@ -1,0 +1,18 @@
+{
+  "name": "@natco/env-setup",
+  "private": true,
+  "devDependencies": {
+    "lerna": "^2.9.0"
+  },
+  "scripts": {
+    "build": "lerna bootstrap && lerna run build",
+    "prebuild": "yarn",
+    "test": "lerna run test",
+    "pihole-build": "sh ./containers/.pihole.sh",
+    "pihole-run": "sh ./containers/.pihole.sh run",
+    "pihole-push": "sh ./containers/.pihole.sh push"
+  },
+  "workspaces": [
+    "packages/*"
+  ]
+}

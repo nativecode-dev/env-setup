@@ -1,5 +1,8 @@
 FROM diginc/pi-hole:latest
 
+ENV RATE_RELOAD=10
+ENV RATE_UPDATE=1
+
 WORKDIR /etc/pihole-youtube
 
 RUN set -ex \
