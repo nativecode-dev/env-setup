@@ -39,11 +39,11 @@ fi
 
 # Copy the current list to updates for inclusion.
 echo "Creating updates file..."
-curl -s "https://api.hackertarget.com/hostsearch/?q=googlevideo.com" | awk -F, 'NR>1 {print $1}' > ${PIHOLE_YOUTUBE_LIST_UPDATE}
+curl -s "https://api.hackertarget.com/hostsearch/?q=googlevideo.com" | grep r*.googlevideo.com | awk -F, 'NR>1 {print $1}' > ${PIHOLE_YOUTUBE_LIST_UPDATE}
 cat ${PIHOLE_YOUTUBE_LIST} >> ${PIHOLE_YOUTUBE_LIST_UPDATE}
 
 # Search for blockable sites from logs.
-grep r*.googlevideo.com ${PIHOLE_LOGS} | awk '{print $8}' | grep -v '^googlevideo.com\|redirector' >> ${PIHOLE_YOUTUBE_LIST_UPDATE}
+grep r*.googlevideo.com ${PIHOLE_LOGS} | awk '{print $8}' | grep -v '^googlevideo.com' >> ${PIHOLE_YOUTUBE_LIST_UPDATE}
 
 # Re-select everything and only return a unique list.
 cat ${PIHOLE_YOUTUBE_LIST} > ${TIMESTAMP_FILE_LIST}

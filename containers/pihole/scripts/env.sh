@@ -5,7 +5,7 @@ export PIHOLE_CLI=`which pihole`
 # Root locations.
 export PIHOLE=/etc/pihole
 export PIHOLE_YOUTUBE=${PIHOLE}-youtube
-export PIHOLE_YOUTUBE_BACKUPS=${PIHOLE_YOUTUBE}/backups
+export PIHOLE_YOUTUBE_BACKUPS=${PIHOLE}/backups
 export PIHOLE_HTML=/var/www/html
 export PIHOLE_LOGS=/var/log/pihole.log
 
