@@ -33,3 +33,5 @@ RUN set -ex \
   # Run the YouTube add blocking install.
   && ./install.sh \
   ;
+
+WORKDIR /etc/pihole

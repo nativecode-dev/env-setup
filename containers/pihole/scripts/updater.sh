@@ -33,7 +33,8 @@ if [ -f ${PIHOLE}/youtube-install.sh ]; then
   rm ${PIHOLE}/youtube-install.sh
 fi
 
-LIST_TIMESTAMP=/tmp/${LIST_OUT_NAME}.`date -d "Oct 21 1973" +%s`
+TIMESTAMP_FILE=${LIST_OUT_NAME}.`date +%s%N | cut -b1-13`
+LIST_TIMESTAMP=/tmp/${TIMESTAMP_FILE}
 
 # Copy the current list to updates for inclusion.
 cat ${LIST_OUT} > ${LIST_OUT}.updates
@@ -61,9 +62,12 @@ rm ${LIST_OUT}.updates
 # Removes duplicate entries.
 perl -i -ne 'print if ! $x{$_}++' ${LIST_OUT}
 
-# Update pi-hole
-if [ "$1" = "reload" ]; then
-  pihole -g
+# Shrink timestamp file and remove zero-byte files.
+find /tmp/${LIST_OUT_NAME}.* -size  0 -print0 | xargs -0 rm
+if [ -f ${LIST_TIMESTAMP} ]; then
+  tar -czvf ${LIST_TIMESTAMP}.tar.gz ${LIST_TIMESTAMP}
+  rm ${LIST_TIMESTAMP}
 fi
 
+# Release lock.
 rm ${PIHOLE_YOUTUBE}/update.lock
