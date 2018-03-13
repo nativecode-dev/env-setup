@@ -1,5 +1,6 @@
 #!/bin/bash
 
+# CWD: /etc/pihole-youtube
 # Include common exports.
 . /etc/pihole-youtube/env.sh
 
