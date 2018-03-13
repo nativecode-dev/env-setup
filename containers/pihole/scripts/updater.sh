@@ -4,7 +4,10 @@
 # Include common exports.
 . /etc/pihole-youtube/env.sh
 
-URL="https://api.hackertarget.com/hostsearch/?q=googlevideo.com"
+cd ${PIHOLE}
+
+URL_HACKERTARGET="https://api.hackertarget.com/hostsearch/?q=googlevideo.com"
+URL_YOUTUBE_GIST="https://cdn.rawgit.com/mikepham/cb0d9ecdc1709705f8f80f4903d6aeef/raw/youtube.list"
 
 if [ -f ${PIHOLE_YOUTUBE}/update.lock ]; then
   echo "Lock file detected, skipping."
@@ -51,16 +54,34 @@ fi
 
 # Grab the known domains from hackertarget.com.
 echo "Creating updates file..."
-curl -s ${URL} | awk -F, 'NR>1 {print $1}' > ${PIHOLE_YOUTUBE_LIST_UPDATE}
-cat ${PIHOLE_YOUTUBE_LIST} >> ${PIHOLE_YOUTUBE_LIST_UPDATE}
 
-# Search for blockable sites from logs.
-cat ${PIHOLE_LOGS} | awk '{print $8}' >> ${PIHOLE_YOUTUBE_LIST_UPDATE}
+# SOURCE: current
+echo "[source] youtube.list"
+cat ${PIHOLE_YOUTUBE_LIST} \
+  > ${PIHOLE_YOUTUBE_LIST_UPDATE}
+
+# SOURCE: hackertarget
+echo "[source] $URL_HACKERTARGET"
+curl -s ${URL_HACKERTARGET} \
+  | awk -F, 'NR>1 {print $1}' \
+  >> ${PIHOLE_YOUTUBE_LIST_UPDATE}
+
+# SOURCE: gist
+echo "[source] $URL_YOUTUBE_GIST"
+curl -s ${URL_YOUTUBE_GIST} \
+  >> ${PIHOLE_YOUTUBE_LIST_UPDATE}
+
+# SOURCE: pihole.log
+echo "[source] $PIHOLE_LOGS"
+cat ${PIHOLE_LOGS} \
+  | awk '{print $8}' \
+  | grep -v redirector.googlevideo.com \
+  >> ${PIHOLE_YOUTUBE_LIST_UPDATE}
 
 # Re-select everything and only return a unique list.
+echo "Updating $PIHOLE_YOUTUBE_LIST"
 cat ${PIHOLE_YOUTUBE_LIST_UPDATE} \
-  | grep r*.googlevideo.com \
-  | grep -v "redirector.googlevideo.com" \
+  | grep -E 'r[0-9]+.*.googlevideo.com' \
   | sort -n \
   | uniq \
   > ${PIHOLE_YOUTUBE_LIST}
