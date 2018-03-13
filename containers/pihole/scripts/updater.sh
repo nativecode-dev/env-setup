@@ -34,7 +34,7 @@ if [ ! -f ${PIHOLE_BACKUP_LIST} ]; then
   cat ${PIHOLE_YOUTUBE_LIST} > ${PIHOLE_BACKUP_LIST}
 else
   echo "Appending backup file: $PIHOLE_BACKUP_LIST"
-  echo "[ARCHIVED:$TIMESTAMP]" >> ${PIHOLE_BACKUP_LIST}
+  echo "##[ARCHIVED:$TIMESTAMP]" >> ${PIHOLE_BACKUP_LIST}
   cat ${PIHOLE_YOUTUBE_LIST} >> ${PIHOLE_BACKUP_LIST}
 fi
 
@@ -51,15 +51,19 @@ fi
 
 # Grab the known domains from hackertarget.com.
 echo "Creating updates file..."
-curl -s ${URL} | grep r*.googlevideo.com | awk -F, 'NR>1 {print $1}' > ${PIHOLE_YOUTUBE_LIST_UPDATE}
+curl -s ${URL} | awk -F, 'NR>1 {print $1}' > ${PIHOLE_YOUTUBE_LIST_UPDATE}
 cat ${PIHOLE_YOUTUBE_LIST} >> ${PIHOLE_YOUTUBE_LIST_UPDATE}
 
 # Search for blockable sites from logs.
-grep r*.googlevideo.com ${PIHOLE_LOGS} | awk '{print $8}' | grep -v '^googlevideo.com' | grep -Ev 'redirector.googlevideo.com' >> ${PIHOLE_YOUTUBE_LIST_UPDATE}
+cat ${PIHOLE_LOGS} | awk '{print $8}' >> ${PIHOLE_YOUTUBE_LIST_UPDATE}
 
 # Re-select everything and only return a unique list.
-cat ${PIHOLE_YOUTUBE_LIST_UPDATE} | sort -n | uniq > ${PIHOLE_YOUTUBE_LIST}
-cat ${PIHOLE_YOUTUBE_LIST} | wc -l > ${PIHOLE_YOUTUBE_LIST}.count
+cat ${PIHOLE_YOUTUBE_LIST_UPDATE} \
+  | grep r*.googlevideo.com \
+  | grep -v "redirector.googlevideo.com" \
+  | sort -n \
+  | uniq \
+  > ${PIHOLE_YOUTUBE_LIST}
 
 # Cleanup the update files.
 if [ -f ${PIHOLE_YOUTUBE_LIST_UPDATE} ]; then
