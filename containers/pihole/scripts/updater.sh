@@ -29,22 +29,24 @@ if [ ! -f /var/www/html/${PIHOLE_YOUTUBE_LIST_NAME} ]; then
 fi
 
 # Append current list to a backup.list file.
-if [ ! -f ${PIHOLE_BACKUP_LIST_NAME} ]; then
-  cat ${PIHOLE_YOUTUBE_LIST} > ${PIHOLE_BACKUP_LIST_NAME}
+if [ ! -f ${PIHOLE_BACKUP_LIST} ]; then
+  echo "Creating backup file: $PIHOLE_BACKUP_LIST"
+  cat ${PIHOLE_YOUTUBE_LIST} > ${PIHOLE_BACKUP_LIST}
 else
-  echo "[ARCHIVED:$TIMESTAMP]" >> ${PIHOLE_BACKUP_LIST_NAME}
-  cat ${PIHOLE_YOUTUBE_LIST} >> ${PIHOLE_BACKUP_LIST_NAME}
+  echo "Appending backup file: $PIHOLE_BACKUP_LIST"
+  echo "[ARCHIVED:$TIMESTAMP]" >> ${PIHOLE_BACKUP_LIST}
+  cat ${PIHOLE_YOUTUBE_LIST} >> ${PIHOLE_BACKUP_LIST}
 fi
 
 # Create a backup before we do anything else.
 if [ "$1" = "backup" ]; then
-  echo "Creating backup file archive from $PIHOLE_BACKUP_LIST..."
+  echo "Archiving file $PIHOLE_BACKUP_LIST..."
   if [ ! -f ${PIHOLE_YOUTUBE_BACKUPS} ]; then
     mkdir ${PIHOLE_YOUTUBE_BACKUPS} -p
   fi
 
   tar -czvf ${PIHOLE_YOUTUBE_BACKUPS}/${TIMESTAMP_FILE}.tgz ${PIHOLE_BACKUP_LIST_NAME}
-  rm ${PIHOLE_BACKUP_LIST_NAME}
+  rm ${PIHOLE_BACKUP_LIST}
 fi
 
 # Grab the known domains from hackertarget.com.
