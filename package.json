@@ -10,7 +10,8 @@
     "test": "lerna run test",
     "pihole-build": "sh ./containers/.pihole.sh",
     "pihole-run": "sh ./containers/.pihole.sh run",
-    "pihole-push": "sh ./containers/.pihole.sh push"
+    "pihole-push": "sh ./containers/.pihole.sh push",
+    "deploy-coreos": "sh scripts/coreos-deploy.sh"
   },
   "workspaces": [
     "packages/*"

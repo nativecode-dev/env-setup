@@ -3,5 +3,10 @@ dist/
 lib/
 node_modules/
 
+*.bz2
 *.log
+*.ovf
 *.pyc
+*.tar
+*.vmdk
+*.zip
