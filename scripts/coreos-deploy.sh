@@ -1,14 +1,20 @@
 #!/bin/bash
 set -eou pipefail
 
-if [ "$1" = "0" ]; then
+if [ "$1" = "" ]; then
     echo "Must provide a host name."
     exit 1
 fi
 
-ARG_NAME="$1"
+if [ "$2" = "" ]; then
+    echo "Must provide a template name."
+    exit 1
+fi
 
-CFG_IGNITION="$PWD/scripts/coreos-machines/$ARG_NAME.json"
+ARG_NAME="$1"
+ARG_TEMPLATE="$2"
+
+CFG_IGNITION="$PWD/scripts/templates/$ARG_TEMPLATE.json"
 
 OVF_COREOS="coreos_production_vmware_ova.ovf"
 OVF_ESXI65="coreos_production_vmware_ova-esxi65.ovf"
