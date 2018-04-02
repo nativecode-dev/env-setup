@@ -1,5 +1,4 @@
 #!/bin/bash
-set -eou pipefail
 
 if [ "$1" = "" ]; then
     echo "Must provide a host name."
