@@ -1,33 +1,38 @@
 #!/bin/bash
 
-if [ "$1" = "" ]; then
+VM_NAME=${1:-""}
+VM_NET=${3:-"Private"}
+VM_TEMPLATE=${2:-""}
+
+if [ "$VM_NAME" = "" ]; then
     echo "Must provide a host name."
     exit 1
 fi
 
-if [ "$2" = "" ]; then
-    echo "Must provide a template name."
+if [ "$VM_TEMPLATE" = "" ]; then
+    echo "Must provide a template."
     exit 1
 fi
 
-ARG_NAME="$1"
-ARG_TEMPLATE="$2"
+VM_HOST=${ESXI_DEPLOY_URI:-"vi://localhost"}
+VM_STORAGE="STORAGE"
 
-CFG_IGNITION="$PWD/scripts/templates/$ARG_TEMPLATE.json"
+CFG_IGNITION="$PWD/scripts/templates/$VM_TEMPLATE.json"
 
 OVF_COREOS="coreos_production_vmware_ova.ovf"
 OVF_ESXI65="coreos_production_vmware_ova-esxi65.ovf"
 
-VM_HOST="$ESXI_DEPLOY_URI"
-VM_NAME="$ARG_NAME"
-VM_NET="Private"
-VM_STORAGE="STORAGE"
+echo "VM_HOST=$VM_HOST"
+echo "VM_NAME=$VM_NAME"
+echo "VM_NET=$VM_NET"
+echo "VM_STORAGE=$VM_STORAGE"
+echo "IGNITION=$CFG_IGNITION"
 
 # Download the production OVF
 if [ ! -f "$OVF_COREOS" ]; then
     wget \
-    https://stable.release.core-os.net/amd64-usr/current/coreos_production_vmware_ova_image.vmdk.bz2 \
-    https://stable.release.core-os.net/amd64-usr/current/coreos_production_vmware_ova.ovf \
+        https://stable.release.core-os.net/amd64-usr/current/coreos_production_vmware_ova_image.vmdk.bz2 \
+        https://stable.release.core-os.net/amd64-usr/current/coreos_production_vmware_ova.ovf \
     ;
     
     bunzip2 coreos_production_vmware_ova_image.vmdk.bz2
@@ -46,12 +51,12 @@ fi
 CFG_IGNITION_DATA=$(envsubst < ${CFG_IGNITION} | base64)
 
 ovftool \
--ds="$VM_STORAGE" \
---name="$VM_NAME" \
---net:"VM Network=$VM_NET" \
---X:guest:"coreos.config.data=$CFG_IGNITION_DATA" \
---X:guest:"coreos.config.data.encoding=base64" \
---powerOn --skipManifestCheck --X:noPrompting --noSSLVerify \
-"$OVF_ESXI65" \
-"$ESXI_DEPLOY_URI" \
+    -ds="$VM_STORAGE" \
+    --name="$VM_NAME" \
+    --net:"VM Network=$VM_NET" \
+    --X:guest:"coreos.config.data=$CFG_IGNITION_DATA" \
+    --X:guest:"coreos.config.data.encoding=base64" \
+    --powerOn --skipManifestCheck --X:noPrompting --noSSLVerify \
+    "$OVF_ESXI65" \
+    "$ESXI_DEPLOY_URI" \
 ;
