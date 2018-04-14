@@ -1,4 +1,4 @@
-#!/bin/sh
+#!/bin/bash
 
 # print env
 echo "# Configuration:"
@@ -12,7 +12,7 @@ echo "FORWARD_HOST=${FORWARD_HOST}"
 echo ""
 
 # process config for this container
-export ESCAPE_DOLLAR='$'
+export ESC_DOLLAR='$'
 envsubst < /etc/nginx/conf.d/auth.conf > /etc/nginx/conf.d/auth.conf
 
 # print config

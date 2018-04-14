@@ -12,7 +12,8 @@
     "pihole-run": "sh ./containers/.pihole.sh run",
     "pihole-push": "sh ./containers/.pihole.sh push",
     "deploy-coreos": "sh scripts/coreos-deploy.sh",
-    "push": "lerna run push"
+    "docker-push": "lerna run push",
+    "docker-run": "lerna run docker"
   },
   "workspaces": [
     "containers/*",

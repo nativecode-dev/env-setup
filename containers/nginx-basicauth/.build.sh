@@ -11,11 +11,6 @@ if [ "$1" = "run" ]; then
     --name nginx-basicauth \
     nativecode/nginx-basicauth:latest \
   ;
-
-  echo "Cleaning up container and volumes..."
-  $DOCKER stop nginx-basicauth
-  $DOCKER volume rm nginx-basicauth
-  $DOCKER volume rm nginx-basicauthDNS
 fi
 
 if [ "$1" = "push" ]; then
