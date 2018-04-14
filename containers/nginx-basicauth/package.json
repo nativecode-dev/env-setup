@@ -1,0 +1,11 @@
+{
+  "author": "opensource@nativecode.com",
+  "license": "MIT",
+  "name": "nginx-basicauth",
+  "repository": "git@github.com:nativecode-dev/docker-nginx-basic-auth.git",
+  "version": "1.0.0",
+  "scripts": {
+    "build": "sh .build.sh",
+    "push": "sh .build.sh push"
+  }
+}

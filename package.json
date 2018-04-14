@@ -11,9 +11,11 @@
     "pihole-build": "sh ./containers/.pihole.sh",
     "pihole-run": "sh ./containers/.pihole.sh run",
     "pihole-push": "sh ./containers/.pihole.sh push",
-    "deploy-coreos": "sh scripts/coreos-deploy.sh"
+    "deploy-coreos": "sh scripts/coreos-deploy.sh",
+    "push": "lerna run push"
   },
   "workspaces": [
+    "containers/*",
     "packages/*"
   ]
 }
