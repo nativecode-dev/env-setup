@@ -1,0 +1,8 @@
+{
+  "name": "docker-nginx-basic-auth",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:nativecode-dev/docker-nginx-basic-auth.git",
+  "author": "opensource@nativecode.com",
+  "license": "MIT"
+}
