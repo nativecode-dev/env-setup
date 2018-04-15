@@ -1,7 +1,7 @@
 {
   "author": "opensource@nativecode.com",
   "license": "MIT",
-  "name": "nginx-basicauth",
+  "name": "app-proxy",
   "repository": "git@github.com:nativecode-dev/docker-nginx-basic-auth.git",
   "version": "1.0.0",
   "scripts": {

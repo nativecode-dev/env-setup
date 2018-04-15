@@ -3,19 +3,19 @@
 DOCKER=`which docker`
 
 echo "Building and tagging image..."
-$DOCKER build --rm -t nativecode/nginx-basicauth:latest src/
+$DOCKER build --rm -t nativecode/app-proxy:latest src/
 
 if [ "$1" = "run" ]; then
   $DOCKER run \
     --rm \
-    --name nginx-basicauth \
-    nativecode/nginx-basicauth:latest \
+    --name app-proxy \
+    nativecode/app-proxy:latest \
   ;
 fi
 
 if [ "$1" = "push" ]; then
   echo "Pushing image..."
-  $DOCKER image push nativecode/nginx-basicauth:latest
+  $DOCKER image push nativecode/app-proxy:latest
 fi
 
 echo "DONE"

@@ -10,12 +10,11 @@ ENV AUTH_REALM="Restricted" \
 	LISTEN_PORT="80"
 
 COPY /root/auth.conf /etc/nginx/conf.d/
-COPY /root/start.sh /start.sh
+COPY /root/entrypoint.sh /entrypoint.sh
 
-RUN apk add --no-cache gettext \
+RUN apk add --no-cache gettext bash \
 	&& rm /etc/nginx/conf.d/default.conf \
 	&& touch /etc/nginx/conf.d/auth.htpasswd \
-	&& chmod +x /start.sh \
 	;
 
-ENTRYPOINT ["/start.sh"]
+CMD ["/entrypoint.sh"]
