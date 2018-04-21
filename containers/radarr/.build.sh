@@ -3,19 +3,19 @@
 DOCKER=`which docker`
 
 echo "Building and tagging image..."
-$DOCKER build --rm -t nativecode/app-proxy:latest src/
+$DOCKER build --rm -t docker.nativecode.net/radarr:latest .
 
 if [ "$1" = "run" ]; then
   $DOCKER run \
     --rm \
-    --name app-proxy \
-    nativecode/app-proxy:latest \
+    --name radarr \
+    docker.nativecode.net/radarr:latest \
   ;
 fi
 
 if [ "$1" = "push" ]; then
   echo "Pushing image..."
-  $DOCKER image push nativecode/app-proxy:latest
+  $DOCKER image push docker.nativecode.net/radarr:latest
 fi
 
 echo "DONE"

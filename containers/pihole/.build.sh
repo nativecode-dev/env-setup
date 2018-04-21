@@ -3,7 +3,7 @@
 DOCKER=`which docker`
 
 echo "Building and tagging image..."
-$DOCKER build --rm -t nativecode/pihole:latest containers/pihole/
+$DOCKER build --rm -t docker.nativecode.net/pihole:latest .
 
 if [ "$1" = "run" ]; then
   $DOCKER run \
@@ -15,7 +15,7 @@ if [ "$1" = "run" ]; then
     -e RATE_UPDATE="2" \
     -v PIHOLE:/etc/pihole \
     -v PIHOLEDNS:/etc/dnsmasq.d \
-    nativecode/pihole:latest \
+    docker.nativecode.net/pihole:latest \
   ;
 
   $DOCKER exec -it pihole /bin/bash
@@ -28,7 +28,7 @@ fi
 
 if [ "$1" = "push" ]; then
   echo "Pushing image..."
-  $DOCKER image push nativecode/pihole:latest
+  $DOCKER image push docker.nativecode.net/pihole:latest
 fi
 
 echo "DONE"

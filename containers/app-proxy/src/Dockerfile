@@ -12,7 +12,7 @@ ENV AUTH_REALM="Restricted" \
 COPY /root/auth.conf /etc/nginx/conf.d/
 COPY /root/entrypoint.sh /entrypoint.sh
 
-RUN apk add --no-cache gettext bash \
+RUN apk add --no-cache gettext \
 	&& rm /etc/nginx/conf.d/default.conf \
 	&& touch /etc/nginx/conf.d/auth.htpasswd \
 	;

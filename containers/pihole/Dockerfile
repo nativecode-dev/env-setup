@@ -1,5 +1,6 @@
 FROM diginc/pi-hole:latest
 
+ENV DEBIAN_FRONTEND=noninteractive
 ENV RATE_RELOAD=10
 ENV RATE_UPDATE=1
 

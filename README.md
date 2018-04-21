@@ -8,4 +8,3 @@ Fixes common WordPress permissions.
 
 ## rancher-agent.sh
 Updates or Restores a local rancher-agent container to use COREOS_PRIVATE_IPV4.
-
