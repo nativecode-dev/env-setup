@@ -16,7 +16,6 @@
     "docker-run": "lerna run docker"
   },
   "workspaces": [
-    "containers/*",
-    "packages/*"
+    "containers/*"
   ]
 }

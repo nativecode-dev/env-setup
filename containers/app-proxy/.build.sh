@@ -3,7 +3,7 @@
 DOCKER=`which docker`
 
 echo "Building and tagging image..."
-$DOCKER build --rm -t docker.nativecode.net/app-proxy:latest src/
+$DOCKER build --rm -t docker.nativecode.net/app-proxy:latest .
 
 if [ "$1" = "run" ]; then
   $DOCKER run \

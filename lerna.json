@@ -22,8 +22,7 @@
   "useWorkspaces": true,
   "lerna": "2.5.1",
   "packages": [
-    "containers/*",
-    "packages/*"
+    "containers/*"
   ],
   "sort": true,
   "version": "1.0.0"
