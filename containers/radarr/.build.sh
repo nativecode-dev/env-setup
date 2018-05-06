@@ -16,6 +16,9 @@ fi
 if [ "$1" = "push" ]; then
   echo "Pushing image..."
   $DOCKER image push docker.nativecode.net/radarr:latest
+
+  $DOCKER build --rm -t nativecode/radarr:latest .
+  $DOCKER image push nativecode/radarr:latest
 fi
 
 echo "DONE"

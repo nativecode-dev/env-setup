@@ -16,6 +16,9 @@ fi
 if [ "$1" = "push" ]; then
   echo "Pushing image..."
   $DOCKER image push docker.nativecode.net/app-proxy:latest
+
+  $DOCKER build --rm -t nativecode/app-proxy:latest .
+  $DOCKER image push nativecode/app-proxy:latest
 fi
 
 echo "DONE"

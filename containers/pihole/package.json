@@ -7,6 +7,10 @@
     "build": "sh .build.sh",
     "docker": "sh .build.sh run",
     "predocker": "yarn build",
-    "push": "sh .build.sh push"
+    "push": "sh .build.sh push",
+    "release": "semantic-release"
+  },
+  "devDependencies": {
+    "semantic-release": "^15.3.1"
   }
 }

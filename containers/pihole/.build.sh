@@ -29,6 +29,9 @@ fi
 if [ "$1" = "push" ]; then
   echo "Pushing image..."
   $DOCKER image push docker.nativecode.net/pihole:latest
+
+  $DOCKER build --rm -t nativecode/pihole:latest .
+  $DOCKER image push nativecode/pihole:latest
 fi
 
 echo "DONE"

@@ -8,12 +8,14 @@
     "build": "lerna bootstrap && lerna run build",
     "prebuild": "yarn",
     "test": "lerna run test",
-    "pihole-build": "sh ./containers/.pihole.sh",
-    "pihole-run": "sh ./containers/.pihole.sh run",
-    "pihole-push": "sh ./containers/.pihole.sh push",
+    "posttest": "yarn release",
     "deploy-coreos": "sh scripts/coreos-deploy.sh",
-    "docker-push": "lerna run push",
-    "docker-run": "lerna run docker"
+    "push": "lerna run push",
+    "prepush": "yarn build",
+    "start": "lerna run docker",
+    "release": "lerna run release",
+    "prelease": "yarn build",
+    "addpkg": "lerna add"
   },
   "workspaces": [
     "containers/*"

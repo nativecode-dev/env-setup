@@ -11,10 +11,10 @@ RUN set -ex \
   #############################################################################
   # PACKAGES
   #############################################################################
-  && apt-get -qq update > /dev/null \
-  && apt-get -qq upgrade -y > /dev/null \
-  && apt-get -qq autoremove -y > /dev/null \
-  && apt-get -qq autoclean -y > /dev/null \
+  && apt-get -qq update \
+  && apt-get -qq upgrade -y \
+  && apt-get -qq autoremove -y \
+  && apt-get -qq autoclean -y \
   ;
 
 COPY scripts/env.sh ./env.sh
