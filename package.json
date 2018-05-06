@@ -13,8 +13,6 @@
     "prepush": "yarn build",
     "start": "lerna run start",
     "prestart": "yarn build",
-    "release": "lerna run release",
-    "prelease": "yarn build",
     "deploy-coreos": "sh scripts/coreos-deploy.sh",
     "add-pkg": "lerna add"
   },
