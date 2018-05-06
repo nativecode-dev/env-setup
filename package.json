@@ -5,17 +5,18 @@
     "lerna": "^2.9.0"
   },
   "scripts": {
-    "build": "lerna bootstrap && lerna run build",
-    "prebuild": "yarn",
+    "build": "lerna run build",
+    "prebuild": "yarn && lerna bootstrap",
     "test": "lerna run test",
     "posttest": "yarn release",
-    "deploy-coreos": "sh scripts/coreos-deploy.sh",
     "push": "lerna run push",
     "prepush": "yarn build",
-    "start": "lerna run docker",
+    "start": "lerna run start",
+    "prestart": "yarn build",
     "release": "lerna run release",
     "prelease": "yarn build",
-    "addpkg": "lerna add"
+    "deploy-coreos": "sh scripts/coreos-deploy.sh",
+    "add-pkg": "lerna add"
   },
   "workspaces": [
     "containers/*"
