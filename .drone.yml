@@ -13,22 +13,22 @@ pipeline:
     <<: *prod
     context: containers/app-proxy
     dockerfile: containers/app-proxy/Dockerfile
-    repo: app-proxy
+    repo: nativecode/app-proxy
 
   pihole: &pihole
     <<: *prod
     context: containers/pihole
     dockerfile: containers/pihole/Dockerfile
-    repo: pihole
+    repo: nativecode/pihole
 
   radarr: &radarr
     <<: *prod
     context: containers/radarr
     dockerfile: containers/radarr/Dockerfile
-    repo: radarr
+    repo: nativecode/radarr
 
   sonarr: &sonarr
     <<: *prod
     context: containers/sonarr
     dockerfile: containers/sonarr/Dockerfile
-    repo: sonarr
+    repo: nativecode/sonarr
