@@ -1,9 +1,9 @@
-nrepo: &nrepo
+hub: &hub
   image: plugins/docker
   secrets: [ docker_username, docker_password ]
 
 prod: &prod
-  <<: *nrepo
+  <<: *hub
   tags: [ latest, "1.0-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
   when:
     branch: master
