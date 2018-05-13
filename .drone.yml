@@ -32,3 +32,11 @@ pipeline:
     context: containers/sonarr
     dockerfile: containers/sonarr/Dockerfile
     repo: nativecode/sonarr
+
+  notification:
+    image: plugins/slack
+    channel: builds
+    username: drone
+    webhook: https://hooks.slack.com/services/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
+    when:
+      status: [ success, failure ]
