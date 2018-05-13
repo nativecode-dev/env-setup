@@ -1,6 +1,5 @@
 latest: &latest
   registry: push.nrepo.io
-  secrets: [ nrepo_username, nrepo_password ]
   tags: [ "1.1-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}", "latest" ]
   when:
     branch: [ develop, master ]
@@ -38,6 +37,7 @@ sonarr: &sonarr
 pipeline:
   appauth_latest:
     image: plugins/docker
+    secrets: [ nrepo_username, nrepo_password ]
     repo: push.nrepo.io/appauth
     <<: [ *appauth, *latest ]
 
