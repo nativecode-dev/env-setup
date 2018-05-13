@@ -1,10 +1,6 @@
 latest: &latest
   registry: push.nrepo.io
-  secrets:
-    - source: nrepo_username
-      target: docker_username
-    - source: nrepo_password
-      target: docker_password
+  secrets: [ nrepo_username, nrepo_password ]
   tags: [ "latest", "1.1-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
   when:
     branch: [ develop, master ]
