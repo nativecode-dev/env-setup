@@ -5,14 +5,14 @@ latest: &latest
       target: docker_username
     - source: nrepo_password
       target: docker_password
-  tags: [ "1.1-${DRONE_COMMIT_SHA:0:7}-${DRONE_BRANCH}", "latest" ]
+  tags: [ "1.${DRONE_BUILD_NUMBER}-pre", "latest" ]
   when:
     branch: master
 
 stable: &stable
   registry: docker.io
   secrets: [ docker_username, docker_password ]
-  tags: [ "1.0-${DRONE_COMMIT_SHA:0:7}", "stable" ]
+  tags: [ "1.${DRONE_BUILD_NUMBER}", "stable", "stable-1" ]
   when:
     event: tag
     branch: master
@@ -41,47 +41,44 @@ sonarr: &sonarr
   dockerfile: containers/sonarr/Dockerfile
 
 pipeline:
+  # appauth
   appauth_latest:
     image: plugins/docker
     repo: up.nrepo.io/appauth
     <<: [ *appauth, *latest ]
-
   appauth_stable:
     image: plugins/docker
     repo: nativecode/appauth
     <<: [ *appauth, *stable ]
-
+  # pihole
   pihole_latest:
     image: plugins/docker
     repo: up.nrepo.io/pihole
     <<: [ *pihole, *latest ]
-
   pihole_stable:
     image: plugins/docker
     repo: nativecode/pihole
     <<: [ *pihole, *stable ]
-
+  # radarr
   radarr_latest:
     image: plugins/docker
     repo: up.nrepo.io/radarr
     <<: [ *radarr, *latest ]
-
   radarr_stable:
     image: plugins/docker
     repo: nativecode/radarr
     <<: [ *radarr, *stable ]
-
+  # sonarr
   sonarr_latest:
     image: plugins/docker
     repo: up.nrepo.io/sonarr
     <<: [ *sonarr, *latest ]
-
   sonarr_stable:
     image: plugins/docker
     repo: nativecode/sonarr
     <<: [ *sonarr, *stable ]
-
-  notification: &notification
+  # notifications
+  notification:
     image: plugins/slack
     when:
       status: [ success, failure ]
