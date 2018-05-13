@@ -16,3 +16,33 @@ pipeline:
     tags: [ latest, "1.0-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
     when:
       branch: master
+
+  pihole: &pihole
+    <<: *nrepo
+    image: plugins/docker
+    context: containers/pihole
+    dockerfile: containers/pihole/Dockerfile
+    repo: nrepo.net/pihole
+    tags: [ latest, "1.0-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
+    when:
+      branch: master
+
+  radarr: &radarr
+    <<: *nrepo
+    image: plugins/docker
+    context: containers/radarr
+    dockerfile: containers/radarr/Dockerfile
+    repo: nrepo.net/radarr
+    tags: [ latest, "1.0-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
+    when:
+      branch: master
+
+  sonarr: &sonarr
+    <<: *nrepo
+    image: plugins/docker
+    context: containers/sonarr
+    dockerfile: containers/sonarr/Dockerfile
+    repo: nrepo.net/sonarr
+    tags: [ latest, "1.0-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
+    when:
+      branch: master
