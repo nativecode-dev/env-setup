@@ -1,48 +1,34 @@
 nrepo: &nrepo
-  registry: nrepo.net
-  secrets:
-    - source: nrepo_username
-      target: docker_username
-    - source: nrepo_password
-      target: docker_password
+  image: plugins/docker
+  secrets: [ docker_username, docker_password ]
+
+prod: &prod
+  <<: *nrepo
+  tags: [ latest, "1.0-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
+  when:
+    branch: master
 
 pipeline:
   app-proxy: &app-proxy
-    <<: *nrepo
-    image: plugins/docker
+    <<: *prod
     context: containers/app-proxy
     dockerfile: containers/app-proxy/Dockerfile
-    repo: nrepo.net/app-proxy
-    tags: [ latest, "1.0-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
-    when:
-      branch: master
+    repo: app-proxy
 
   pihole: &pihole
-    <<: *nrepo
-    image: plugins/docker
+    <<: *prod
     context: containers/pihole
     dockerfile: containers/pihole/Dockerfile
-    repo: nrepo.net/pihole
-    tags: [ latest, "1.0-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
-    when:
-      branch: master
+    repo: pihole
 
   radarr: &radarr
-    <<: *nrepo
-    image: plugins/docker
+    <<: *prod
     context: containers/radarr
     dockerfile: containers/radarr/Dockerfile
-    repo: nrepo.net/radarr
-    tags: [ latest, "1.0-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
-    when:
-      branch: master
+    repo: radarr
 
   sonarr: &sonarr
-    <<: *nrepo
-    image: plugins/docker
+    <<: *prod
     context: containers/sonarr
     dockerfile: containers/sonarr/Dockerfile
-    repo: nrepo.net/sonarr
-    tags: [ latest, "1.0-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
-    when:
-      branch: master
+    repo: sonarr
