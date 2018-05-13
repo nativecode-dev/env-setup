@@ -8,35 +8,40 @@ prod: &prod
   when:
     branch: master
 
+slack: &slack
+  image: plugins/slack
+  channel: builds
+  username: drone
+  secrets:
+    - source: webhook_slack_builds
+      target: plugin_webhook
+
 pipeline:
-  app-proxy: &app-proxy
+  release_app-proxy: &release_app-proxy
     <<: *prod
     context: containers/app-proxy
     dockerfile: containers/app-proxy/Dockerfile
     repo: nativecode/app-proxy
 
-  pihole: &pihole
+  release_pihole: &release_pihole
     <<: *prod
     context: containers/pihole
     dockerfile: containers/pihole/Dockerfile
     repo: nativecode/pihole
 
-  radarr: &radarr
+  release_radarr: &release_radarr
     <<: *prod
     context: containers/radarr
     dockerfile: containers/radarr/Dockerfile
     repo: nativecode/radarr
 
-  sonarr: &sonarr
+  release_sonarr: &release_sonarr
     <<: *prod
     context: containers/sonarr
     dockerfile: containers/sonarr/Dockerfile
     repo: nativecode/sonarr
 
-  notification:
-    image: plugins/slack
-    channel: builds
-    username: drone
-    webhook: https://hooks.slack.com/services/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
+  notification: &notification
+    <<: *slack
     when:
       status: [ success, failure ]
