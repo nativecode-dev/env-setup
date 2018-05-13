@@ -12,7 +12,7 @@ pipeline:
     image: plugins/docker
     context: containers/app-proxy
     dockerfile: containers/app-proxy/Dockerfile
-    repo: app-proxy
+    repo: nrepo.net, app-proxy
     tags: [ latest, "1.0-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
     when:
       branch: master
