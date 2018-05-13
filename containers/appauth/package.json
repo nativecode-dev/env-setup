@@ -5,6 +5,9 @@
   "repository": "git@github.com:nativecode-dev/docker-nginx-basic-auth.git",
   "version": "1.0.1-0",
   "scripts": {
-    "build": "docker build --rm -t nativecode/appauth ."
+    "build": "docker build --rm -t nativecode/appauth .",
+    "start": "docker run --rm --name appauth nativecode/appauth",
+    "prestart": "yarn build",
+    "poststart": "docker stop appauth"
   }
 }

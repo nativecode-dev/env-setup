@@ -4,6 +4,9 @@
   "name": "pihole",
   "version": "1.0.1-0",
   "scripts": {
-    "build": "docker build --rm -t nativecode/pihole ."
+    "build": "docker build --rm -t nativecode/pihole .",
+    "start": "docker run --rm --name pihole nativecode/pihole",
+    "prestart": "yarn build",
+    "poststart": "docker stop pihole"
   }
 }

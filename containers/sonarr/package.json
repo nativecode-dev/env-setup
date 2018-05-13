@@ -4,6 +4,9 @@
   "name": "sonarr",
   "version": "1.0.1-0",
   "scripts": {
-    "build": "docker build --rm -t nativecode/sonarr ."
+    "build": "docker build --rm -t nativecode/sonarr .",
+    "start": "docker run --rm --name sonarr nativecode/sonarr",
+    "prestart": "yarn build",
+    "poststart": "docker stop sonarr"
   }
 }

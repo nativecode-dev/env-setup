@@ -15,6 +15,7 @@ COPY /root/entrypoint.sh /entrypoint.sh
 RUN apk add --no-cache gettext \
 	&& rm /etc/nginx/conf.d/default.conf \
 	&& touch /etc/nginx/conf.d/auth.htpasswd \
+    && chmod +x /entrypoint.sh \
 	;
 
-CMD ["/entrypoint.sh"]
+CMD [ "/entrypoint.sh" ]
