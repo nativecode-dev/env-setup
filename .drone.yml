@@ -1,0 +1,18 @@
+nrepo: &nrepo
+  registry: nrepo.net
+  secrets:
+    - source: nrepo_username
+      target: docker_username
+    - source: nrepo_password
+      target: docker_password
+
+pipeline:
+  app-proxy: &app-proxy
+    <<: *nrepo
+    image: plugins/docker
+    context: containers/app-proxy
+    dockerfile: containers/app-proxy/Dockerfile
+    repo: app-proxy
+    tags: [ latest, "1.0-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
+    when:
+      branch: master
