@@ -38,11 +38,11 @@ sonarr: &sonarr
   repo: nativecode/sonarr
 
 pipeline:
-  latest_app-proxy: &stable_app-proxy
+  latest_app-proxy:
     image: plugins/docker
     <<: [ *app-proxy, *latest ]
 
-  stable_app-proxy: &stable_app-proxy
+  stable_app-proxy:
     image: plugins/docker
     <<: [ *app-proxy, *stable ]
 
