@@ -17,34 +17,32 @@ slack: &slack
     - source: webhook_slack_builds
       target: plugin_webhook
 
-app-proxy: &app-proxy
-  context: containers/app-proxy
-  dockerfile: containers/app-proxy/Dockerfile
-  repo: nativecode/app-proxy
+appauth: &appauth
+  context: containers/appauth
+  dockerfile: containers/appauth/Dockerfile
 
 pihole: &pihole
   context: containers/pihole
   dockerfile: containers/pihole/Dockerfile
-  repo: nativecode/pihole
 
 radarr: &radarr
   context: containers/radarr
   dockerfile: containers/radarr/Dockerfile
-  repo: nativecode/radarr
 
 sonarr: &sonarr
   context: containers/sonarr
   dockerfile: containers/sonarr/Dockerfile
-  repo: nativecode/sonarr
 
 pipeline:
-  latest_app-proxy:
+  appauth_latest:
     image: plugins/docker
-    <<: [ *app-proxy, *latest ]
+    repo: nativecode/appauth
+    <<: [ *appauth, *latest ]
 
-  stable_app-proxy:
+  appauth_stable:
     image: plugins/docker
-    <<: [ *app-proxy, *stable ]
+    repo: nrepo.io/appauth
+    <<: [ *appauth, *stable ]
 
   notification: &notification
     image: plugins/slack
