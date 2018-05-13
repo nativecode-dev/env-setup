@@ -1,5 +1,9 @@
 latest: &latest
-  secrets: [ nrepo_username, nrepo_password ]
+  secrets:
+    - source: nrepo_username
+      target: docker_username
+    - source: nrepo_password
+      target: docker_password
   tags: [ "latest", "1.1-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
   when:
     branch: [ develop, master ]
@@ -43,6 +47,36 @@ pipeline:
     image: plugins/docker
     repo: nativecode/appauth
     <<: [ *appauth, *stable ]
+
+  pihole_latest:
+    image: plugins/docker
+    repo: nrepo.io/pihole
+    <<: [ *pihole, *latest ]
+
+  pihole_stable:
+    image: plugins/docker
+    repo: nativecode/pihole
+    <<: [ *pihole, *stable ]
+
+  radarr_latest:
+    image: plugins/docker
+    repo: nrepo.io/radarr
+    <<: [ *radarr, *latest ]
+
+  radarr_stable:
+    image: plugins/docker
+    repo: nativecode/radarr
+    <<: [ *radarr, *stable ]
+
+  sonarr_latest:
+    image: plugins/docker
+    repo: nrepo.io/sonarr
+    <<: [ *sonarr, *latest ]
+
+  sonarr_stable:
+    image: plugins/docker
+    repo: nativecode/sonarr
+    <<: [ *sonarr, *stable ]
 
   notification: &notification
     image: plugins/slack
