@@ -40,6 +40,7 @@ sonarr: &sonarr
 pipeline:
   appauth_latest:
     image: plugins/docker
+    registry: nrepo.io
     repo: nrepo.io/appauth
     <<: [ *appauth, *latest ]
 
@@ -50,6 +51,7 @@ pipeline:
 
   pihole_latest:
     image: plugins/docker
+    registry: nrepo.io
     repo: nrepo.io/pihole
     <<: [ *pihole, *latest ]
 
@@ -60,6 +62,7 @@ pipeline:
 
   radarr_latest:
     image: plugins/docker
+    registry: nrepo.io
     repo: nrepo.io/radarr
     <<: [ *radarr, *latest ]
 
@@ -70,6 +73,7 @@ pipeline:
 
   sonarr_latest:
     image: plugins/docker
+    registry: nrepo.io
     repo: nrepo.io/sonarr
     <<: [ *sonarr, *latest ]
 
