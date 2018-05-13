@@ -1,47 +1,53 @@
-hub: &hub
-  image: plugins/docker
+latest: &latest
   secrets: [ docker_username, docker_password ]
+  tags: [ "latest", "1.1-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
+  when:
+    branch: develop
 
-prod: &prod
-  <<: *hub
-  tags: [ latest, "1.0-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
+stable: &stable
+  secrets: [ nrepo_username, nrepo_password ]
+  tags: [ "stable", "1.0-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
   when:
     branch: master
 
 slack: &slack
-  image: plugins/slack
   channel: builds
   username: drone
   secrets:
     - source: webhook_slack_builds
       target: plugin_webhook
 
+app-proxy: &app-proxy
+  context: containers/app-proxy
+  dockerfile: containers/app-proxy/Dockerfile
+  repo: nativecode/app-proxy
+
+pihole: &pihole
+  context: containers/pihole
+  dockerfile: containers/pihole/Dockerfile
+  repo: nativecode/pihole
+
+radarr: &radarr
+  context: containers/radarr
+  dockerfile: containers/radarr/Dockerfile
+  repo: nativecode/radarr
+
+sonarr: &sonarr
+  context: containers/sonarr
+  dockerfile: containers/sonarr/Dockerfile
+  repo: nativecode/sonarr
+
 pipeline:
-  release_app-proxy: &release_app-proxy
-    <<: *prod
-    context: containers/app-proxy
-    dockerfile: containers/app-proxy/Dockerfile
-    repo: nativecode/app-proxy
+  latest_app-proxy: &stable_app-proxy
+    image: plugins/docker
+    <<: [ *app-proxy, *latest ]
 
-  release_pihole: &release_pihole
-    <<: *prod
-    context: containers/pihole
-    dockerfile: containers/pihole/Dockerfile
-    repo: nativecode/pihole
-
-  release_radarr: &release_radarr
-    <<: *prod
-    context: containers/radarr
-    dockerfile: containers/radarr/Dockerfile
-    repo: nativecode/radarr
-
-  release_sonarr: &release_sonarr
-    <<: *prod
-    context: containers/sonarr
-    dockerfile: containers/sonarr/Dockerfile
-    repo: nativecode/sonarr
+  stable_app-proxy: &stable_app-proxy
+    image: plugins/docker
+    <<: [ *app-proxy, *stable ]
 
   notification: &notification
-    <<: *slack
+    image: plugins/slack
     when:
       status: [ success, failure ]
+    <<: *slack
