@@ -1,4 +1,5 @@
 latest: &latest
+  registry: push.nrepo.io
   secrets:
     - source: nrepo_username
       target: docker_username
@@ -9,6 +10,7 @@ latest: &latest
     branch: [ develop, master ]
 
 stable: &stable
+  registry: docker.io
   secrets: [ docker_username, docker_password ]
   tags: [ "stable", "1.0-${DRONE_BRANCH}-${DRONE_COMMIT_SHA:0:7}" ]
   when:
@@ -40,8 +42,7 @@ sonarr: &sonarr
 pipeline:
   appauth_latest:
     image: plugins/docker
-    registry: nrepo.io
-    repo: nrepo.io/appauth
+    repo: push.nrepo.io/appauth
     <<: [ *appauth, *latest ]
 
   appauth_stable:
@@ -51,8 +52,7 @@ pipeline:
 
   pihole_latest:
     image: plugins/docker
-    registry: nrepo.io
-    repo: nrepo.io/pihole
+    repo: push.nrepo.io/pihole
     <<: [ *pihole, *latest ]
 
   pihole_stable:
@@ -62,8 +62,7 @@ pipeline:
 
   radarr_latest:
     image: plugins/docker
-    registry: nrepo.io
-    repo: nrepo.io/radarr
+    repo: push.nrepo.io/radarr
     <<: [ *radarr, *latest ]
 
   radarr_stable:
@@ -73,8 +72,7 @@ pipeline:
 
   sonarr_latest:
     image: plugins/docker
-    registry: nrepo.io
-    repo: nrepo.io/sonarr
+    repo: push.nrepo.io/sonarr
     <<: [ *sonarr, *latest ]
 
   sonarr_stable:
