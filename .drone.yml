@@ -7,14 +7,13 @@ latest: &latest
       target: docker_password
   tags: [ "1.${DRONE_BUILD_NUMBER}-pre", "latest" ]
   when:
-    branch: master
+    branch: develop
 
 stable: &stable
   registry: docker.io
   secrets: [ docker_username, docker_password ]
   tags: [ "1.${DRONE_BUILD_NUMBER}", "stable" ]
   when:
-    event: tag
     branch: master
 
 slack: &slack
