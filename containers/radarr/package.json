@@ -4,8 +4,8 @@
   "name": "radarr",
   "version": "1.0.1-0",
   "scripts": {
-    "build": "docker build --rm -t nativecode/radarr .",
-    "start": "docker run --rm --name radar nativecode/radarr",
+    "build": "docker build --rm -t nrepo.io/radarr .",
+    "start": "docker run --rm --name radar nrepo.io/radarr",
     "prestart": "yarn build",
     "poststart": "docker stop radarr"
   }

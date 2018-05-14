@@ -39,6 +39,10 @@ sonarr: &sonarr
   context: containers/sonarr
   dockerfile: containers/sonarr/Dockerfile
 
+wordpress: &wordpress
+  context: containers/wordpress
+  dockerfiler: containers/wordpress/Dockerfile
+
 pipeline:
   # appauth
   appauth_latest:
@@ -76,6 +80,13 @@ pipeline:
     image: plugins/docker
     repo: nativecode/sonarr
     <<: [ *sonarr, *stable ]
+  # wordpress
+  wordpress_latest:
+    image: plugins/docker
+    <<: [ *wordpress, *latest ]
+  wordpress_stable:
+    image: plugins/docker
+    <<: [ *wordpress, *stable ]
   # notifications
   notification:
     image: plugins/slack

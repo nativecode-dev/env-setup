@@ -1,0 +1,12 @@
+{
+  "author": "opensource@nativecode.com",
+  "license": "MIT",
+  "name": "wordpress",
+  "version": "1.0.1-0",
+  "scripts": {
+    "build": "docker build --rm -t nrepo.io/wordpress .",
+    "start": "docker run --rm --name wordpress nrepo.io/wordpress",
+    "prestart": "yarn build",
+    "poststart": "docker stop wordpress"
+  }
+}
