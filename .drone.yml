@@ -83,9 +83,11 @@ pipeline:
   # wordpress
   wordpress_latest:
     image: plugins/docker
+    repo: up.nrepo.io/wordpress
     <<: [ *wordpress, *latest ]
   wordpress_stable:
     image: plugins/docker
+    repo: nativecode/wordpress
     <<: [ *wordpress, *stable ]
   # notifications
   notification:
