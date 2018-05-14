@@ -41,7 +41,7 @@ sonarr: &sonarr
 
 wordpress: &wordpress
   context: containers/wordpress
-  dockerfiler: containers/wordpress/Dockerfile
+  dockerfile: containers/wordpress/Dockerfile
 
 pipeline:
   # appauth
