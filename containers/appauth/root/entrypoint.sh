@@ -27,7 +27,9 @@ if grep -q $HTPASSWD "$HTPASSWD_FILE"; then
   cat $HTPASSWD_FILE
   echo ""
 else
+  echo "# Appending $HTPASSWD to auth.htpasswd:"
   echo $HTPASSWD > $HTPASSWD_FILE
+  echo ""
 fi
 
 # run nginx in foreground
