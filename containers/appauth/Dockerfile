@@ -20,3 +20,4 @@ RUN apk add --update --no-cache gettext \
   ;
 
 CMD [ "/entrypoint.sh" ]
+VOLUME [ "/etc/nginx/conf.d" ]
