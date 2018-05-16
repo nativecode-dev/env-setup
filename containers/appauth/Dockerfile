@@ -2,9 +2,10 @@ FROM nginx:alpine
 LABEL maintainer "opensource@nativecode.com"
 
 ENV AUTH_REALM="Restricted" \
+  FORWARD_PROTOCOL="http" \
   FORWARD_HOST="localhost" \
   FORWARD_PORT="8080" \
-  FORWARD_PROTOCOL="http" \
+  FORWARD_PATH="/" \
   HTPASSWD_FILE="/etc/nginx/conf.d/auth.htpasswd" \
   HTPASSWD="" \
   LISTEN_PORT="80"

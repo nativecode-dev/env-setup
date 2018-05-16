@@ -9,6 +9,7 @@ echo "HTPASSWD=${HTPASSWD}"
 echo "FORWARD_PROTOCOL=${FORWARD_PROTOCOL}"
 echo "FORWARD_PORT=${FORWARD_PORT}"
 echo "FORWARD_HOST=${FORWARD_HOST}"
+echo "FORWARD_PATH=${FORWARD_PATH}"
 echo ""
 
 # process config for this container

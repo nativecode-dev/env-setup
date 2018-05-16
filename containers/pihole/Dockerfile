@@ -25,7 +25,7 @@ RUN set -ex \
   && chmod +x ./env.sh \
   && chmod +x ./install.sh \
   && chmod +x ./updater.sh \
-  # Run the YouTube add blocking install.
+  # Run the YouTube ad blocking install.
   && ./install.sh \
   ;
 
