@@ -22,7 +22,7 @@ cat /etc/nginx/conf.d/auth.conf
 echo ""
 
 # append optional contents of HTPASSWD variable to auth file
-echo $HTPASSWD >> $HTPASSWD_FILE
+echo $HTPASSWD > $HTPASSWD_FILE
 
 # run nginx in foreground
 nginx -g "daemon off;"
