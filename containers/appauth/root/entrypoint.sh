@@ -25,12 +25,12 @@ echo ""
 if grep -q $HTPASSWD "$HTPASSWD_FILE"; then
   echo "# Running with NGINX auth.htpasswd:"
   cat $HTPASSWD_FILE
-  echo ""
 else
-  echo "# Appending $HTPASSWD to auth.htpasswd:"
+  echo "# Appending '$HTPASSWD_FILE' to auth.htpasswd:"
   echo $HTPASSWD > $HTPASSWD_FILE
-  echo ""
 fi
+
+echo ""
 
 # run nginx in foreground
 nginx -g "daemon off;"
