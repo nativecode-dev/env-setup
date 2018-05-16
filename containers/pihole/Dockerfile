@@ -29,4 +29,5 @@ RUN set -ex \
   && ./install.sh \
   ;
 
+VOLUME /etc/pihole
 WORKDIR /etc/pihole
