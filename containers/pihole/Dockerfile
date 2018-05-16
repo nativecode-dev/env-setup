@@ -6,26 +6,22 @@ ENV RATE_UPDATE=1
 
 WORKDIR /etc/pihole-youtube
 
-RUN set -ex \
-  && export TERM=dumb \
-  #############################################################################
-  # PACKAGES
-  #############################################################################
-  && apt-get -qq update \
-  && apt-get -qq upgrade -y \
-  && apt-get -qq autoremove -y \
-  && apt-get -qq autoclean -y \
-  ;
-
 COPY scripts/env.sh ./env.sh
 COPY scripts/install.sh ./install.sh
 COPY scripts/updater.sh ./updater.sh
 
 RUN set -ex \
+  && export TERM=dumb \
+  #############################################################################
+  # PACKAGES
+  #############################################################################
+  && apt-get update \
+  && apt-get upgrade -y \
+  && apt-get autoremove -y \
+  && apt-get autoclean -y \
   #############################################################################
   # APPLICATION
   #############################################################################
-  # Make scripts executable.
   && chmod +x ./env.sh \
   && chmod +x ./install.sh \
   && chmod +x ./updater.sh \

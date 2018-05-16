@@ -1,8 +1,9 @@
 FROM wordpress:fpm-alpine
 
 RUN set -ex \
-  && apk --update --no-cache add libzip  libzip-dev \
+  && apk --no-cache --update add libzip \
+  && apk --no-cache --virtual .buildeps add libzip-dev \
   && docker-php-ext-configure zip --with-libzip \
   && docker-php-ext-install zip  \
-  && apk del libzip-dev \
+  && apk del .buildeps \
   ;
