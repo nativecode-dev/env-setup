@@ -12,7 +12,7 @@ latest: &latest
 stable: &stable
   registry: docker.io
   secrets: [ docker_username, docker_password ]
-  tags: [ "1.${DRONE_BUILD_NUMBER}", "stable" ]
+  tags: [ "1.${DRONE_BUILD_NUMBER}", "latest", "stable" ]
   when:
     branch: master
 

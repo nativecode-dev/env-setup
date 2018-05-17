@@ -62,13 +62,15 @@ cat ${PIHOLE_YOUTUBE_LIST} \
 
 # SOURCE: hackertarget
 echo "[source] $URL_HACKERTARGET"
-curl -s ${URL_HACKERTARGET} \
+curl -s \
+  | ${URL_HACKERTARGET} \
   | awk -F, 'NR>1 {print $1}' \
   >> ${PIHOLE_YOUTUBE_LIST_UPDATE}
 
 # SOURCE: gist
 echo "[source] $URL_YOUTUBE_GIST"
-curl -s ${URL_YOUTUBE_GIST} \
+curl -s \
+  | ${URL_YOUTUBE_GIST} \
   >> ${PIHOLE_YOUTUBE_LIST_UPDATE}
 
 # SOURCE: pihole.log
