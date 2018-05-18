@@ -31,23 +31,28 @@
       },
       {
         "contents": "[Unit]\nDescription=Turn on swap\nRequires=create-swapfile.service\nAfter=create-swapfile.service\n\n[Swap]\nWhat=/var/vm/swapfile1\n\n[Install]\nWantedBy=multi-user.target",
+        "enable": true,
         "name": "var-vm-swapfile1.swap"
       },
       {
         "contents": "[Unit]\nDescription=Create a swapfile\nRequiresMountsFor=/var\nConditionPathExists=!/var/vm/swapfile1\n\n[Service]\nType=oneshot\nExecStart=/usr/bin/mkdir -p /var/vm\nExecStart=/usr/bin/fallocate -l 1024m /var/vm/swapfile1\nExecStart=/usr/bin/chmod 600 /var/vm/swapfile1\nRemainAfterExit=true",
+        "enable": true,
         "name": "create-swapfile.service"
       },
       {
-        "contents": "[Unit]\nBefore=remote-fs.target\n\n[Mount]\nWhat=storage.in.nativecode.com/Media\nWhere=/data/media\nType=nfs\n\n[Install]\nWantedBy=remote-fs.target",
-        "name": ""
+        "contents": "[Unit]\nBefore=remote-fs.target\n\n[Mount]\nWhat=storage.in.nativecode.com:/Media\nWhere=/data/media\nType=nfs\n\n[Install]\nWantedBy=remote-fs.target",
+        "enable": true,
+        "name": "data-media.mount"
       },
       {
-        "contents": "[Unit]\nBefore=remote-fs.target\n\n[Mount]\nWhat=storage.in.nativecode.com/Media/Movies\nWhere=/data/storage/movies\nType=nfs\n\n[Install]\nWantedBy=remote-fs.target",
-        "name": ""
+        "contents": "[Unit]\nBefore=remote-fs.target\n\n[Mount]\nWhat=storage.in.nativecode.com:/Media/Movies\nWhere=/data/storage/movies\nType=nfs\n\n[Install]\nWantedBy=remote-fs.target",
+        "enable": true,
+        "name": "data-storage-movies.mount"
       },
       {
-        "contents": "[Unit]\nBefore=remote-fs.target\n\n[Mount]\nWhat=storage.in.nativecode.com/Media/Shows\nWhere=/data/storage/shows\nType=nfs\n\n[Install]\nWantedBy=remote-fs.target",
-        "name": ""
+        "contents": "[Unit]\nBefore=remote-fs.target\n\n[Mount]\nWhat=storage.in.nativecode.com:/Media/Shows\nWhere=/data/storage/shows\nType=nfs\n\n[Install]\nWantedBy=remote-fs.target",
+        "enable": true,
+        "name": "data-storage-shows.mount"
       }
     ]
   }

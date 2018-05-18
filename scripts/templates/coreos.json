@@ -33,10 +33,12 @@
       },
       {
         "contents": "[Unit]\nDescription=Turn on swap\nRequires=create-swapfile.service\nAfter=create-swapfile.service\n\n[Swap]\nWhat=/var/vm/swapfile1\n\n[Install]\nWantedBy=multi-user.target\n",
+        "enable": true,
         "name": "var-vm-swapfile1.swap"
       },
       {
         "contents": "[Unit]\nDescription=Create a swapfile\nRequiresMountsFor=/var\nConditionPathExists=!/var/vm/swapfile1\n\n[Service]\nType=oneshot\nExecStart=/usr/bin/mkdir -p /var/vm\nExecStart=/usr/bin/fallocate -l 1024m /var/vm/swapfile1\nExecStart=/usr/bin/chmod 600 /var/vm/swapfile1\nRemainAfterExit=true",
+        "enable": true,
         "name": "create-swapfile.service"
       }
     ]
