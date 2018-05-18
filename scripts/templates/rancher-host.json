@@ -22,25 +22,9 @@
   },
   "systemd": {
     "units": [{
-        "contents": "[Unit]\nBefore=remote-fs.target\n\n[Mount]\nWhat=storage.in.nativecode.com:/Media\nWhere=/mnt/media\nType=nfs\n\n[Install]\nWantedBy=remote-fs.target",
-        "enable": true,
-        "name": "mnt-media.mount"
-      },
-      {
-        "contents": "[Unit]\nBefore=remote-fs.target\n\n[Mount]\nWhat=storage.in.nativecode.com:/Media\nWhere=/mnt/radarr\nType=nfs\n\n[Install]\nWantedBy=remote-fs.target",
-        "enable": true,
-        "name": "mnt-radarr.mount"
-      },
-      {
-        "contents": "[Unit]\nBefore=remote-fs.target\n\n[Mount]\nWhat=storage.in.nativecode.com:/Media\nWhere=/mnt/sonarr\nType=nfs\n\n[Install]\nWantedBy=remote-fs.target",
-        "enable": true,
-        "name": "mnt-sonarr.mount"
-      },
-      {
-        "contents": "[Unit]\nDescription=Rancher\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nExecStartPre=/usr/bin/docker pull rancher/server:stable\nExecStart=/usr/bin/docker run --name rancher --hostname rancher --rm rancher/server:stable --db-host rancherdb.nativecode.com --db-port 3306 --db-name rancher --db-user rancher --db-pass 0b0ZFt5MdUo8HWuK13Cy\nExecStop=/usr/bin/docker stop rancher\nExecStopPost=/usr/bin/docker rm rancher\nTimeoutSec=600\n\n[Install]\nWantedBy=multi-user.target",
-        "enable": true,
-        "name": "rancher.service"
-      }
-    ]
+      "contents": "[Unit]\nDescription=Rancher\nAfter=docker.service\nRequires=docker.service\n\n[Service]\nExecStartPre=/usr/bin/docker pull rancher/server:stable\nExecStart=/usr/bin/docker run --name rancher --hostname rancher --rm -p 80:8080 rancher/server:stable --db-host dc02.in.nativecode.com --db-pass 0b0ZFt5MdUo8HWuK13Cy\nExecStop=/usr/bin/docker stop rancher\nExecStopPost=/usr/bin/docker rm rancher\nTimeoutSec=600\n\n[Install]\nWantedBy=multi-user.target",
+      "enable": true,
+      "name": "rancher.service"
+    }]
   }
 }
