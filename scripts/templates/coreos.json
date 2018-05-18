@@ -18,7 +18,7 @@
         "path": "/etc/sysctl.d/80-swappiness.conf",
         "user": {},
         "contents": {
-          "source": "data:,vm.swappiness%3D10",
+          "source": "data:,vm.swappiness=10",
           "verification": {}
         },
         "mode": 420
@@ -38,19 +38,14 @@
   "systemd": {
     "units": [
       {
-        "name": "var-lib-data.mount",
-        "enable": true,
-        "contents": "[Mount]\nWhat=/dev/md/data\nWhere=/var/lib/data\nType=ext4\n\n[Install]\nWantedBy=local-fs.target"
-      },
-      {
-        "contents": "[Unit]\nDescription=Turn on swap\nRequires=create-swapfile.service\nAfter=create-swapfile.service\n\n[Swap]\nWhat=/var/vm/swapfile1\n\n[Install]\nWantedBy=multi-user.target\n",
-        "enable": true,
-        "name": "var-vm-swapfile1.swap"
-      },
-      {
-        "contents": "[Unit]\nDescription=Create a swapfile\nRequiresMountsFor=/var\nConditionPathExists=!/var/vm/swapfile1\n\n[Service]\nType=oneshot\nExecStart=/usr/bin/mkdir -p /var/vm\nExecStart=/usr/bin/fallocate -l 1024m /var/vm/swapfile1\nExecStart=/usr/bin/chmod 600 /var/vm/swapfile1\nRemainAfterExit=true",
+        "contents": "[Unit]\nDescription=Create a swapfile\nRequiresMountsFor=/var\nConditionPathExists=!/var/vm/swapfile1\n\n[Service]\nType=oneshot\nExecStart=/usr/bin/mkdir -p /var/vm\nExecStart=/usr/bin/fallocate -l 2048m /var/vm/swapfile1\nExecStart=/usr/bin/chmod 600 /var/vm/swapfile1\nRemainAfterExit=true",
         "enable": true,
         "name": "create-swapfile.service"
+      },
+      {
+        "contents": "[Unit]\nDescription=Turn on swap\nRequires=create-swapfile.service\nAfter=create-swapfile.service\n\n[Swap]\nWhat=/var/vm/swapfile1\n\n[Install]\nWantedBy=multi-user.target",
+        "enable": true,
+        "name": "var-vm-swapfile1.swap"
       }
     ]
   }
