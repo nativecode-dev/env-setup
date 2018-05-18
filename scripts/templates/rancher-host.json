@@ -3,14 +3,27 @@
     "version": "2.1.0"
   },
   "storage": {
-    "files": [{
-      "filesystem": "root",
-      "path": "/etc/hostname",
-      "mode": 420,
-      "contents": {
-        "source": "data:,$VM_NAME.$VM_DOMAIN"
+    "files": [
+      {
+        "filesystem": "root",
+        "path": "/etc/hostname",
+        "mode": 420,
+        "contents": {
+          "source": "data:,$VM_NAME.$VM_DOMAIN"
+        }
+      },
+      {
+        "filesystem": "root",
+        "group": {},
+        "path": "/etc/sysctl.d/80-swappiness.conf",
+        "user": {},
+        "contents": {
+          "source": "data:,vm.swappiness%3D10",
+          "verification": {}
+        },
+        "mode": 420
       }
-    }]
+    ]
   },
   "passwd": {
     "users": [
