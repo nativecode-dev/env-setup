@@ -1,0 +1,100 @@
+{
+  "ignition": {
+    "version": "2.1.0"
+  },
+  "storage": {
+    "disks": [
+      {
+        "device": "/dev/sdb",
+        "wipeTable": true,
+        "partitions": [
+          {
+            "label": "raid.1.1",
+            "number": 1,
+            "size": 131072,
+            "start": 0
+          }
+        ]
+      },
+      {
+        "device": "/dev/sdc",
+        "wipeTable": true,
+        "partitions": [
+          {
+            "label": "raid.1.2",
+            "number": 1,
+            "size": 131072,
+            "start": 0
+          }
+        ]
+      }
+    ],
+    "raid": [
+      {
+        "devices": [
+          "/dev/disk/by-partlabel/raid.1.1",
+          "/dev/disk/by-partlabel/raid.1.2"
+        ],
+        "level": "stripe",
+        "name": "data"
+      }
+    ],
+    "filesystems": [
+      {
+        "mount": {
+          "device": "/dev/md/data",
+          "format": "ext4",
+          "label": "DATA"
+        }
+      }
+    ],
+    "files": [
+      {
+        "filesystem": "root",
+        "path": "/etc/hostname",
+        "mode": 420,
+        "contents": {
+          "source": "data:,$VM_NAME.$VM_DOMAIN"
+        }
+      },
+      {
+        "filesystem": "root",
+        "group": {},
+        "path": "/etc/sysctl.d/80-swappiness.conf",
+        "user": {},
+        "contents": {
+          "source": "data:,vm.swappiness=10",
+          "verification": {}
+        },
+        "mode": 420
+      }
+    ]
+  },
+  "passwd": {
+    "users": [
+      {
+        "name": "core",
+        "sshAuthorizedKeys": [
+          "$ESXI_DEPLOY_SSH"
+        ]
+      }
+    ]
+  },
+  "systemd": {
+    "units": [
+      {
+        "name": "var-lib-data.mount",
+        "enable": true,
+        "contents": "[Mount]\nWhat=/dev/md/data\nWhere=/var/lib/data\nType=ext4\n\n[Install]\nWantedBy=local-fs.target"
+      },
+      {
+        "contents": "[Unit]\nDescription=Turn on swap\nRequires=create-swapfile.service\nAfter=create-swapfile.service\n\n[Swap]\nWhat=/var/vm/swapfile1\n\n[Install]\nWantedBy=multi-user.target\n",
+        "name": "var-vm-swapfile1.swap"
+      },
+      {
+        "contents": "[Unit]\nDescription=Create a swapfile\nRequiresMountsFor=/var\nConditionPathExists=!/var/vm/swapfile1\n\n[Service]\nType=oneshot\nExecStart=/usr/bin/mkdir -p /var/vm\nExecStart=/usr/bin/fallocate -l 1024m /var/vm/swapfile1\nExecStart=/usr/bin/chmod 600 /var/vm/swapfile1\nRemainAfterExit=true",
+        "name": "create-swapfile.service"
+      }
+    ]
+  }
+}

@@ -1,8 +1,9 @@
 #!/bin/bash
 
-VM_NAME=${1:-""}
-VM_NET=${3:-"Private"}
-VM_TEMPLATE=${2:-""}
+export VM_DOMAIN="in.nativecode.com"
+export VM_NAME=${1:-""}
+export VM_NET=${3:-"VM Network"}
+export VM_TEMPLATE=${2:-""}
 
 if [ "$VM_NAME" = "" ]; then
     echo "Must provide a host name."
@@ -22,11 +23,14 @@ CFG_IGNITION="$PWD/scripts/templates/$VM_TEMPLATE.json"
 OVF_COREOS="coreos_production_vmware_ova.ovf"
 OVF_ESXI65="coreos_production_vmware_ova-esxi65.ovf"
 
+echo "Using template $CFG_IGNITION"
+echo "VM_DOMAIN=$VM_DOMAIN"
 echo "VM_HOST=$VM_HOST"
 echo "VM_NAME=$VM_NAME"
 echo "VM_NET=$VM_NET"
 echo "VM_STORAGE=$VM_STORAGE"
 echo "IGNITION=$CFG_IGNITION"
+echo $(envsubst < ${CFG_IGNITION})
 
 # Download the production OVF
 if [ ! -f "$OVF_COREOS" ]; then
