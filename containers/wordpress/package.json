@@ -4,8 +4,8 @@
   "name": "wordpress",
   "version": "1.0.1-0",
   "scripts": {
-    "build": "docker build --rm -t nrepo.io/wordpress .",
-    "start": "docker run --rm --name wordpress nrepo.io/wordpress",
+    "build": "docker build --rm -t nativecode/wordpress .",
+    "start": "docker run --rm --name wordpress nativecode/wordpress",
     "prestart": "yarn build",
     "poststart": "docker stop wordpress"
   }

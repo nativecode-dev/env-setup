@@ -7,13 +7,8 @@
   "scripts": {
     "build": "lerna run build",
     "prebuild": "yarn && lerna bootstrap",
-    "test": "lerna run test",
-    "posttest": "yarn release",
-    "push": "lerna run push",
-    "prepush": "yarn build",
     "start": "lerna run start",
-    "prestart": "yarn build",
-    "deploy-coreos": "sh scripts/coreos-deploy.sh",
+    "deploy": "sh scripts/coreos-deploy.sh",
     "add-pkg": "lerna add"
   },
   "workspaces": [
