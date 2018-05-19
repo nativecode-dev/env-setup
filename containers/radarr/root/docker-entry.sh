@@ -13,6 +13,6 @@ mkdir -p "$MOUNT"
 echo ""
 echo "Starting RPC Bind"
 rpc.statd & rpcbind -f &
-echo "Mounting $SERVER:$SHARE to $MOUNT"
+echo "Mounting $SERVER:$SHARE to $MOUNT with $OPTIONS"
 mount.nfs -o "nfsvers=$NFSVER,$OPTIONS" "$SERVER:$SHARE" "$MOUNT"
 mount | grep nfs
