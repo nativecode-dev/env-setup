@@ -22,4 +22,4 @@ RUN set -ex \
   && chmod +x /docker-entry.sh \
   ;
 
-CMD [ "/docker-entry.sh" ]
+# CMD [ "/docker-entry.sh" ]

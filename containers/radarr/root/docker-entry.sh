@@ -13,5 +13,5 @@ echo "Starting RPC Bind"
 rpc.statd & rpcbind -f &
 
 echo "Mounting $SERVER:$SHARE to $MOUNT"
-mount -t "nfs$NFSVER" -o "nfsvers=$NFSVER,$OPTIONS" "$SERVER:$SHARE" "$MOUNT"
+mount.nfs -o "nfsvers=$NFSVER,$OPTIONS" "$SERVER:$SHARE" "$MOUNT"
 mount | grep nfs
