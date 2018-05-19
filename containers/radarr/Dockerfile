@@ -14,7 +14,7 @@ RUN set -ex \
   && apt-get update \
   && apt-get upgrade -y \
   # Install NFS client
-  && apt-get install -y rpcbind nfs-common \
+  && apt-get install -y rpcbind nfs-common dnsutils iputils-ping \
   # Cleanup
   && apt-get autoremove -y \
   && apt-get autoclean -y \
@@ -22,4 +22,4 @@ RUN set -ex \
   && chmod +x /docker-entry.sh \
   ;
 
-# CMD [ "/docker-entry.sh" ]
+CMD [ "/docker-entry.sh" ]

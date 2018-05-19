@@ -5,7 +5,7 @@
   "version": "1.0.1-0",
   "scripts": {
     "build": "docker build --rm -t nativecode/radarr .",
-    "start": "docker run --rm --name radar -e SERVER=storage.in.nativecode.com -e SHARE=/Media -e OPTIONS=ro -e NFSVER=3 nativecode/radarr",
+    "start": "docker run --rm --name radarr -e SERVER=storage.in.nativecode.com -e SHARE=/Media -e OPTIONS=ro -e NFSVER=3 nativecode/radarr",
     "prestart": "yarn build",
     "poststart": "docker stop radarr"
   }
