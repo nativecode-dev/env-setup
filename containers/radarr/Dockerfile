@@ -18,6 +18,8 @@ RUN set -ex \
   # Cleanup
   && apt-get autoremove -y \
   && apt-get autoclean -y \
+  # Permissions
+  && chmod +x /docker-entry.sh \
   ;
 
 CMD [ "/docker-entry.sh" ]
