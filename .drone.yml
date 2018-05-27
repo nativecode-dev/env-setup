@@ -70,7 +70,7 @@ pipeline:
   plex_latest:
     image: plugins/docker
     repo: up.nrepo.io/plex
-    <<: [ *plex, *plex ]
+    <<: [ *plex, *latest ]
   plex_stable:
     image: plugins/docker
     repo: nativecode/plex
