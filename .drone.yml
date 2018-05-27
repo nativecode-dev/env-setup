@@ -31,6 +31,10 @@ pihole: &pihole
   context: containers/pihole
   dockerfile: containers/pihole/Dockerfile
 
+plex: &plex
+  context: containers/plex
+  dockerfile: containers/plex/Dockerfile
+
 radarr: &radarr
   context: containers/radarr
   dockerfile: containers/radarr/Dockerfile
@@ -62,6 +66,15 @@ pipeline:
     image: plugins/docker
     repo: nativecode/pihole
     <<: [ *pihole, *stable ]
+  # plex
+  plex_latest:
+    image: plugins/docker
+    repo: up.nrepo.io/pihole
+    <<: [ *plex, *plex ]
+  plex_stable:
+    image: plugins/docker
+    repo: nativecode/plex
+    <<: [ *plex, *stable ]
   # radarr
   radarr_latest:
     image: plugins/docker
