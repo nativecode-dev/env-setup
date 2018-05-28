@@ -3,7 +3,8 @@ FROM alpine:latest
 ADD /root/entry.sh /usr/local/bin/entry.sh
 
 ENV FSTYPE nfs
-ENV MOUNT_OPTIONS nfsvers=4
+ENV FSVERSION 4
+ENV MOUNT_OPTIONS nfsvers=$FSVERSION
 ENV MOUNTPOINT /mnt/data
 
 RUN  set -ex \
