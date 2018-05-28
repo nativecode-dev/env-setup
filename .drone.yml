@@ -27,6 +27,10 @@ appauth: &appauth
   context: containers/appauth
   dockerfile: containers/appauth/Dockerfile
 
+mntnfs: &mntnfs
+  context: containers/mntnfs
+  dockerfile: containers/mntnfs/Dockerfile
+
 pihole: &pihole
   context: containers/pihole
   dockerfile: containers/pihole/Dockerfile
@@ -57,6 +61,15 @@ pipeline:
     image: plugins/docker
     repo: nativecode/appauth
     <<: [ *appauth, *stable ]
+  # mntnfs
+  mntnfs_latest:
+    image: plugins/docker
+    repo: up.nrepo.io/mntnfs
+    <<: [ *mntnfs, *latest ]
+  mntnfs_stable:
+    image: plugins/docker
+    repo: nativecode/mntnfs
+    <<: [ *mntnfs, *stable ]
   # pihole
   pihole_latest:
     image: plugins/docker
