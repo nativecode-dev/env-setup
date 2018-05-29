@@ -12,7 +12,7 @@ mkdir -p "$MOUNT_POINT"
 
 rpc.statd &
 rpcbind -f &
-mount -t nfs -o "$MOUNT_OPTIONS" "$SERVER:$SHARE" "$MOUNT_POINT"
+mount.nfs -o "$MOUNT_OPTIONS" "$SERVER:$SHARE" "$MOUNT_POINT"
 
 mount | grep nfs
 
