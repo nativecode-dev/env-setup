@@ -1,21 +1,18 @@
 #! /bin/sh -e
 
-echo "NFSVER=$NFSVER"
-echo "FSTYPE=$FSTYPE"
-echo "FSVERSION=$FSVERSION"
 echo "SERVER=$SERVER"
 echo "SHARE=$SHARE"
 echo "MOUNT_OPTIONS=$MOUNT_OPTIONS"
-echo "MOUNTPOINT=$MOUNTPOINT"
+echo "MOUNT_POINT=$MOUNT_POINT"
 echo ""
 echo "$SERVER:$SHARE"
 
-echo "Making mount directory $MOUNTPOINT..."
-mkdir -p "$MOUNTPOINT"
+echo "Making mount directory $MOUNT_POINT..."
+mkdir -p "$MOUNT_POINT"
 
 rpc.statd &
 rpcbind -f &
-mount -t "$FSTYPE" -o "$NFSVER,$MOUNT_OPTIONS" "$SERVER:$SHARE" "$MOUNTPOINT"
+mount -t nfs -o "$MOUNT_OPTIONS" "$SERVER:$SHARE" "$MOUNT_POINT"
 
 mount | grep nfs
 

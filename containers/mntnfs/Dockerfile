@@ -2,11 +2,10 @@ FROM alpine:latest
 
 ADD /root/entry.sh /usr/local/bin/entry.sh
 
-ENV FSTYPE nfs
-ENV FSVERSION 4
-ENV NFSVER nfsvers=$FSVERSION
+ENV SERVER localhost
+ENV SHARE /
 ENV MOUNT_OPTIONS ro
-ENV MOUNTPOINT /mnt/data
+ENV MOUNT_POINT /mnt/data
 
 RUN  set -ex \
   && apk update \
