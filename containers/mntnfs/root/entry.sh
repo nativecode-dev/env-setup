@@ -1,6 +1,8 @@
 #! /bin/sh -e
 
+echo "NFSVER=$NFSVER"
 echo "FSTYPE=$FSTYPE"
+echo "FSVERSION=$FSVERSION"
 echo "SERVER=$SERVER"
 echo "SHARE=$SHARE"
 echo "MOUNT_OPTIONS=$MOUNT_OPTIONS"
@@ -13,7 +15,7 @@ mkdir -p "$MOUNTPOINT"
 
 rpc.statd &
 rpcbind -f &
-mount -t "$FSTYPE" -o "$MOUNT_OPTIONS" "$SERVER:$SHARE" "$MOUNTPOINT"
+mount -t "$FSTYPE" -o "$NFSVER,$MOUNT_OPTIONS" "$SERVER:$SHARE" "$MOUNTPOINT"
 
 mount | grep nfs
 

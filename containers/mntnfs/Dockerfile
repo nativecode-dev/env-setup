@@ -4,7 +4,8 @@ ADD /root/entry.sh /usr/local/bin/entry.sh
 
 ENV FSTYPE nfs
 ENV FSVERSION 4
-ENV MOUNT_OPTIONS nfsvers=$FSVERSION
+ENV NFSVER nfsvers=$FSVERSION
+ENV MOUNT_OPTIONS ro
 ENV MOUNTPOINT /mnt/data
 
 RUN  set -ex \
