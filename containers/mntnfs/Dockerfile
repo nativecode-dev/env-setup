@@ -6,6 +6,7 @@ ENV SERVER localhost
 ENV SHARE /
 ENV MOUNT_OPTIONS ro,vers=4.1
 ENV MOUNT_POINT /mnt/data
+ENV MOUNT_TYPE nfs4
 
 RUN  set -ex \
   && apk update \
