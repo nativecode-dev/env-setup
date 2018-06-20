@@ -1,0 +1,11 @@
+{
+  "author": "opensource@nativecode.com",
+  "license": "MIT",
+  "name": "imdbpy",
+  "version": "1.0.1-0",
+  "scripts": {
+    "build": "docker build --rm -t nativecode/imdbpy .",
+    "start": "docker run --rm --name imdbpy -e MYSQL_HOST=services.in.nativecode.com -e MYSQL_PASSWORD=1x9dE1aQkFhuvn20 -v imdbpy:/data nativecode/imdbpy",
+    "prestart": "yarn build"
+  }
+}

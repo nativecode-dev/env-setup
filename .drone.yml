@@ -27,6 +27,10 @@ appauth: &appauth
   context: containers/appauth
   dockerfile: containers/appauth/Dockerfile
 
+imdbpy: &imdbpy
+  context: containers/imdbpy
+  dockerfile: containers/imdbpy/Dockerfile
+
 mntnfs: &mntnfs
   context: containers/mntnfs
   dockerfile: containers/mntnfs/Dockerfile
@@ -61,6 +65,15 @@ pipeline:
     image: plugins/docker
     repo: nativecode/appauth
     <<: [ *appauth, *stable ]
+  # imdbpy
+  imdbpy_latest:
+    image: plugins/docker
+    repo: up.nrepo.io/imdbpy
+    <<: [ *imdbpy, *latest ]
+  imdbpy_stable:
+    image: plugins/docker
+    repo: nativecode/imdbpy
+    <<: [ *imdbpy, *stable ]
   # mntnfs
   mntnfs_latest:
     image: plugins/docker
