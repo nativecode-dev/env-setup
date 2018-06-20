@@ -4,7 +4,7 @@ ARG VERSION=4.9
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ENV IMDB_FTP="ftp://ftp.fu-berlin.de/pub/misc/movies/database/frozendata/"
+ENV IMDB_FTP="ftp://ftp.fu-berlin.de/pub/misc/movies/database/"
 ENV MYSQL_DATABASE="imdbpy"
 ENV MYSQL_HOST="imdbpy"
 ENV MYSQL_USER="imdbpy"
@@ -14,13 +14,13 @@ WORKDIR /opt
 
 RUN set -ex \
   && apt-get update \
-  && apt-get install -y git python3-pip wget \
+  && apt-get install -y apt-utils git libmysqlclient-dev python3-pip wget \
   ;
 
 ADD /root/docker-entry.sh /docker-entry.sh
 
 RUN set -ex \
-  && pip3 install imdbpy \
+  && pip3 install imdbpy mysqlclient \
   && chmod +x /docker-entry.sh \
   ;
 
