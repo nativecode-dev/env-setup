@@ -25,7 +25,8 @@ echo "-------------------------------------------------------------------------"
 
 imdbpy2sql.py \
   -d /data/ \
-  -u "mysql://$MYSQL_USER:$MYSQL_PASSWORD@$MYSQL_HOST/$MYSQL_DATABASE"
+  -u "mysql://$MYSQL_USER:$MYSQL_PASSWORD@$MYSQL_HOST/$MYSQL_DATABASE" \
+  --mysql-force-myisam \
   ;
 
 echo "done."
