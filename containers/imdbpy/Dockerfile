@@ -4,7 +4,7 @@ ARG VERSION=4.9
 
 ENV DEBIAN_FRONTEND=noninteractive
 
-ENV IMDB_FTP="ftp://ftp.fu-berlin.de/pub/misc/movies/database/"
+ENV IMDB_FTP="ftp://ftp.fu-berlin.de/pub/misc/movies/database/frozendata/"
 ENV MYSQL_DATABASE="imdbpy"
 ENV MYSQL_HOST="imdbpy"
 ENV MYSQL_USER="imdbpy"
