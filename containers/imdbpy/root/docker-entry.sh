@@ -13,7 +13,7 @@ cd /data
 echo "Downloading latest IMDB data files..."
 echo "-------------------------------------------------------------------------"
 
-wget -r \
+wget -rcN \
   --accept="*.gz" \
   --no-directories \
   --no-host-directories \
