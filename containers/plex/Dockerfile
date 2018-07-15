@@ -7,7 +7,7 @@ ADD /root/etc/cont-init.d/30-mount-shares /etc/cont-init.d/30-mount-shares
 
 RUN set -ex \
   && apt-get update \
-  && apt-get install -y unzip \
+  && apt-get install -y nfs-common unzip \
   && curl -L -o WebTools.bundle.zip $WEBTOOLS_RELEASE_URL \
   && ls -lah \
   ;
