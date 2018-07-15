@@ -2,6 +2,14 @@
   "ignition": {
     "version": "2.1.0"
   },
+  "passwd": {
+    "users": [{
+      "name": "core",
+      "sshAuthorizedKeys": [
+        "$ESXI_DEPLOY_SSH"
+      ]
+    }]
+  },
   "storage": {
     "files": [{
       "filesystem": "root",
@@ -12,12 +20,13 @@
       }
     }]
   },
-  "passwd": {
-    "users": [{
-      "name": "core",
-      "sshAuthorizedKeys": [
-        "$ESXI_DEPLOY_SSH"
-      ]
+  "systemd": {
+    "units": [{
+      "mask": true,
+      "name": "update-engine.service"
+    }, {
+      "mask": true,
+      "name": "locksmithd.service"
     }]
   }
 }
