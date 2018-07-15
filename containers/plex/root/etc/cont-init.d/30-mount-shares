@@ -1,0 +1,18 @@
+#!/usr/bin/with-contenv bash
+
+# If we are debugging, enable trace
+if [ "${DEBUG,,}" = "true" ]; then
+  set -x
+fi
+
+echo "Mounting network shares"
+
+echo "Mounting movies..."
+mkdir -p /data/Movies
+mount.nfs -o ro nas01.in.nativecode.com:/Movies /data/Movies
+
+echo "Mounting shows..."
+mkdir -p /data/Shows
+mount.nfs -o ro storage.in.nativecode.com:/Media/Shows /data/Shows
+
+echo "Mounting network shares complete"
