@@ -33,11 +33,9 @@
   "systemd": {
     "units": [{
       "contents": "[Unit]\nDescription=Turn on swap\nRequires=create-swapfile.service\nAfter=create-swapfile.service\n\n[Swap]\nWhat=/var/vm/swapfile\n\n[Install]\nWantedBy=multi-user.target\n",
-      "enable": true,
       "name": "var-vm-swapfile.swap"
     }, {
-      "contents": "[Unit]\nDescription=Create a swapfile\nRequiresMountsFor=/var/vm\nConditionPathExists=!/var/vm/swapfile\n\n[Service]\nType=oneshot\nExecStart=/usr/bin/mkdir -p /var/vm\nExecStart=/usr/bin/fallocate -l 4096m /var/vm/swapfile\nExecStart=/usr/bin/chmod 600 /var/vm/swapfile\nExecStart=/sbin/mkswap /var/vm/swapfile\nRemainAfterExit=true",
-      "enable": true,
+      "contents": "[Unit]\nDescription=Create a swapfile\nRequiresMountsFor=/var\nConditionPathExists=!/var/vm/swapfile\n\n[Service]\nType=oneshot\nExecStart=/usr/bin/mkdir -p /var/vm\nExecStart=/usr/bin/fallocate -l 1024m /var/vm/swapfile\nExecStart=/usr/bin/chmod 600 /var/vm/swapfile\nRemainAfterExit=true",
       "name": "create-swapfile.service"
     }, {
       "mask": true,
