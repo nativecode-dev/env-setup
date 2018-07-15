@@ -61,6 +61,7 @@ ovftool \
     --X:guest:"coreos.config.data=$CFG_IGNITION_DATA" \
     --X:guest:"coreos.config.data.encoding=base64" \
     --powerOn --skipManifestCheck --X:noPrompting --noSSLVerify \
+    --datastore=Storage \
     "$OVF_ESXI65" \
     "$ESXI_DEPLOY_URI" \
 ;
