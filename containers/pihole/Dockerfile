@@ -1,4 +1,4 @@
-FROM diginc/pi-hole:latest
+FROM pihole/pihole:latest
 
 ENV DEBIAN_FRONTEND=noninteractive
 ENV RATE_RELOAD=10

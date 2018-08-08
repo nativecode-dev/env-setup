@@ -11,7 +11,7 @@
       ]
     },
     "run": {
-      "stream": true
+      "stream": false
     }
   },
   "loglevel": "error",
