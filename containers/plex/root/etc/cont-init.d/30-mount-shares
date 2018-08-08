@@ -9,10 +9,10 @@ echo "Mounting network shares"
 
 echo "Mounting movies..."
 mkdir -p /data/Movies
-mount.nfs -o ro nas01.in.nativecode.com:/Movies /data/Movies
+mount.nfs -o ro,nfsvers=4,nolock nas01.in.nativecode.com:/Movies /data/Movies
 
 echo "Mounting shows..."
 mkdir -p /data/Shows
-mount.nfs -o ro storage.in.nativecode.com:/Media/Shows /data/Shows
+mount.nfs -o ro,nfsvers=3,nolock storage.in.nativecode.com:/Media/Shows /data/Shows
 
 echo "Mounting network shares complete"
