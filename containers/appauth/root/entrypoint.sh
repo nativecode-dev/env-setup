@@ -22,10 +22,7 @@ cat /etc/nginx/conf.d/auth.conf
 echo ""
 
 # append optional contents of HTPASSWD variable to auth file
-if grep -q $HTPASSWD "$HTPASSWD_FILE"; then
-  echo "# Running with NGINX auth.htpasswd:"
-  cat $HTPASSWD_FILE
-else
+if [$HTPASSWD -ne ""]; then
   echo "# Appending '$HTPASSWD_FILE' to auth.htpasswd:"
   echo $HTPASSWD > $HTPASSWD_FILE
 fi
