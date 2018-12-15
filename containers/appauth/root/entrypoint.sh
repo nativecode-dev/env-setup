@@ -21,13 +21,5 @@ echo "# Running with NGINX auth.conf:"
 cat /etc/nginx/conf.d/auth.conf
 echo ""
 
-# append optional contents of HTPASSWD variable to auth file
-if [$HTPASSWD -ne ""]; then
-  echo "# Appending '$HTPASSWD_FILE' to auth.htpasswd:"
-  echo $HTPASSWD > $HTPASSWD_FILE
-fi
-
-echo ""
-
 # run nginx in foreground
 nginx -g "daemon off;"
