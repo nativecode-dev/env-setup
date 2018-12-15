@@ -16,9 +16,18 @@ echo ""
 export ESC_DOLLAR='$'
 envsubst < /etc/nginx/conf.d/auth.conf > /etc/nginx/conf.d/auth.conf
 
+if [ ! -f $HTPASSWD_FILE ]; then
+    $HTPASSWD > $HTPASSWD_FILE
+fi
+
 # print config
 echo "# Running with NGINX auth.conf:"
 cat /etc/nginx/conf.d/auth.conf
+echo ""
+
+# print auth
+echo "# Running with NGINX auth.conf:"
+cat $HTPASSWD_FILE
 echo ""
 
 # run nginx in foreground
