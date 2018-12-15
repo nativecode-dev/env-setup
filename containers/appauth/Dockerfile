@@ -17,6 +17,9 @@ RUN apk add --update --no-cache gettext \
   && rm /etc/nginx/conf.d/default.conf \
   && touch /etc/nginx/conf.d/auth.htpasswd \
   && chmod +x /entrypoint.sh \
+  && mkdir -p /htpasswd \
   ;
+
+VOLUME /htpasswd
 
 CMD [ "/entrypoint.sh" ]
