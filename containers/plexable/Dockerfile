@@ -21,4 +21,4 @@ RUN set -ex \
 
 VOLUME /data
 
-CMD ["/bin/bash", "-c", "entrypoint.sh"]
+CMD ["/bin/bash", "-c", "/entrypoint.sh"]
