@@ -43,6 +43,10 @@ plex: &plex
   context: containers/plex
   dockerfile: containers/plex/Dockerfile
 
+plexable: &plexable
+  context: containers/plexable
+  dockerfile: containers/plexable/Dockerfile
+
 radarr: &radarr
   context: containers/radarr
   dockerfile: containers/radarr/Dockerfile
@@ -65,6 +69,7 @@ pipeline:
     image: plugins/docker
     repo: nativecode/appauth
     <<: [ *appauth, *stable ]
+
   # imdbpy
   imdbpy_latest:
     image: plugins/docker
@@ -74,6 +79,7 @@ pipeline:
     image: plugins/docker
     repo: nativecode/imdbpy
     <<: [ *imdbpy, *stable ]
+
   # mntnfs
   mntnfs_latest:
     image: plugins/docker
@@ -83,6 +89,7 @@ pipeline:
     image: plugins/docker
     repo: nativecode/mntnfs
     <<: [ *mntnfs, *stable ]
+
   # pihole
   pihole_latest:
     image: plugins/docker
@@ -92,6 +99,7 @@ pipeline:
     image: plugins/docker
     repo: nativecode/pihole
     <<: [ *pihole, *stable ]
+
   # plex
   plex_latest:
     image: plugins/docker
@@ -101,6 +109,17 @@ pipeline:
     image: plugins/docker
     repo: nativecode/plex
     <<: [ *plex, *stable ]
+
+  # plexable
+  plexable_latest:
+    image: plugins/docker
+    repo: up.nrepo.io/plexable
+    <<: [ *plexable, *latest ]
+  plexable_stable:
+    image: plugins/docker
+    repo: nativecode/plexable
+    <<: [ *plexable, *stable ]
+
   # radarr
   radarr_latest:
     image: plugins/docker
@@ -110,6 +129,7 @@ pipeline:
     image: plugins/docker
     repo: nativecode/radarr
     <<: [ *radarr, *stable ]
+
   # sonarr
   sonarr_latest:
     image: plugins/docker
@@ -119,6 +139,7 @@ pipeline:
     image: plugins/docker
     repo: nativecode/sonarr
     <<: [ *sonarr, *stable ]
+
   # wordpress
   wordpress_latest:
     image: plugins/docker
@@ -128,6 +149,7 @@ pipeline:
     image: plugins/docker
     repo: nativecode/wordpress
     <<: [ *wordpress, *stable ]
+
   # notifications
   notification:
     image: plugins/slack

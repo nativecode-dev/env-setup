@@ -1,0 +1,12 @@
+{
+  "author": "opensource@nativecode.com",
+  "license": "MIT",
+  "name": "plexable",
+  "version": "0.0.0",
+  "scripts": {
+    "build": "docker build --rm -t nativecode/plexable .",
+    "start": "docker run --rm --name plexable nativecode/plexable",
+    "prestart": "yarn build",
+    "poststart": "docker stop plexable"
+  }
+}
