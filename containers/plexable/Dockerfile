@@ -19,6 +19,7 @@ RUN set -ex \
     && chmod u+x /entrypoint.sh \
     ;
 
+WORKDIR /data
 VOLUME /data
 
 CMD ["/bin/bash", "-c", "/entrypoint.sh"]
