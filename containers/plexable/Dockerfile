@@ -1,6 +1,6 @@
 FROM ubuntu:bionic AS BUILD
 ENV DEBIAN_FRONTEND noninteractive
-ENV PLEXABLE_ARGUMENTS "-rd -p /data -w /tmp"
+ENV PLEXABLE_ARGUMENTS "-frd"
 
 RUN set -ex \
     && apt-get update \
