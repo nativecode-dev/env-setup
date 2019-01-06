@@ -1,5 +1,0 @@
-runcmd:
-  - sudo dd if=/dev/zero of=/swapfile bs=1k count=1M
-  - sudo chmod 600 /swapfile
-  - sudo mkswap /swapfile
-  - sudo swapon /swapfile
