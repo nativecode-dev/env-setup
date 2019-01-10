@@ -65,7 +65,7 @@ workspace=""
 fileIn=""
 fileOut=""
 count=0
-qualityPreset="Normal"
+qualityPreset="Fast 1080p30"
 
 RED='\033[0;31m'
 GREEN='\033[0;32m'

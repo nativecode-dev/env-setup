@@ -17,4 +17,4 @@ mount -t "$MOUNT_TYPE" -o "$MOUNT_OPTIONS" "$SERVER:$SHARE" "$MOUNT_POINT"
 
 mount | grep nfs
 
-while true; do sleep 1000; done
+while true; do sleep 10; done
